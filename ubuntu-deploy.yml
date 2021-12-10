@@ -39,6 +39,13 @@
       - telnet
       - vim
       - wget
+      
+  pre_tasks:
+    - name: Make sure universe repository is enabled for Ansible > 2.9.6
+      apt_repository:
+       repo: deb http://archive.ubuntu.com/ubuntu hirsute universe
+       state: present
+       update_cache: true
 
   roles:
     - role: geerlingguy.apache
@@ -69,6 +76,12 @@
         state: touch
       become: false
       tags: hush
+
+    - name: Make sure universe repository is removed
+      apt_repository:
+       repo: deb http://archive.ubuntu.com/ubuntu hirsute universe
+       state: absent
+       update_cache: true
 
     - name: Install the extra packages
       apt:
