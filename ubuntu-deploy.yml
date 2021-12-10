@@ -59,6 +59,10 @@
         name: ansible
         state: latest
 
+    - name: Make sure python is done
+      pause:
+        seconds: 10
+        
     - name: Make sure hirsute universe repository is removed again
       apt_repository:
        repo: deb http://archive.ubuntu.com/ubuntu hirsute universe
