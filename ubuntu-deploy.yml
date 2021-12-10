@@ -45,7 +45,7 @@
       
   pre_tasks:
     - name: Failed, this is not Ubuntu 20...
-      when: {{ ansible_distribution_major_version }} != {{ ubuntu_major_version }}
+      when: ansible_distribution_major_version != ubuntu_major_version
   
     - name: Set a fact with the user name.
       become: false
