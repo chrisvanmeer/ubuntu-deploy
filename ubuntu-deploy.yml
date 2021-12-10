@@ -27,6 +27,7 @@
       - curl
       - ddgr
       - git
+      - gitsome
       - googler
       - htop
       - less
