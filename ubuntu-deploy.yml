@@ -62,6 +62,7 @@
       file:
         path: ~/.hushlogin
         state: touch
+      become: false
       tags: hush
 
     - name: Install the extra packages
