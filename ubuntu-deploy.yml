@@ -44,7 +44,6 @@
     pre_tasks:
     - name: Run whoami without become.
       command: whoami
-      changed_when: false
       become: false
       register: whoami
       tags: docker
