@@ -14,6 +14,8 @@
 
     firewall_allowed_tcp_ports:
       - "22"
+      
+    ntp_timezone: "Europe/Amsterdam"
 
     extra_packages:
       - alpine
@@ -56,6 +58,8 @@
       tags: security
     - role: geerlingguy.firewall
       tags: firewall
+    - roles: geerlingguy.ntp
+      tags: ntp
 
   tasks:
     - name: Hush all the login banner stuff
