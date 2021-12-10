@@ -8,4 +8,6 @@ ansible-galaxy install geerlingguy.apache geerlingguy.mysql geerlingguy.php geer
 ```
 
 ### Deploy the magic
-`ansible-playbook ubuntu-deploy.yml`
+```
+ansible-playbook ubuntu-deploy.yml
+```
