@@ -15,3 +15,7 @@ ansible-galaxy install geerlingguy.apache geerlingguy.mysql geerlingguy.php geer
 ```
 ansible-playbook ubuntu-deploy.yml
 ```
+or
+```
+ansible-pull https://raw.githubusercontent.com/chrisvanmeer/ubuntu-deploy/main/ubuntu-deploy.yml
+```
