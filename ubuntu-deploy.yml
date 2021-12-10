@@ -45,9 +45,14 @@
     - name: Get the username running the deploy
       become: false
       local_action: command whoami
-      register: docker_users
+      register: docker_users2
       tags: docker
       
+    - debug:
+        var: docker_users2.stdout
+      tags: docker
+      register: docker_users
+
     - debug:
         var: docker_users
       tags: docker
