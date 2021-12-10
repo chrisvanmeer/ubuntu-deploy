@@ -4,6 +4,8 @@
   become: true
 
   vars:
+    ubuntu_major_version: 19
+    
     apache_listen_ip: "127.0.0.1"
     
     php_version: "8.0"
@@ -42,6 +44,9 @@
       - wget
       
   pre_tasks:
+    - name: Failed, this is not Ubuntu 20...
+      when: {{ ansible_distribution_major_version }} <> {{ ubuntu_major_version }}
+  
     - name: Set a fact with the user name.
       become: false
       set_fact:
