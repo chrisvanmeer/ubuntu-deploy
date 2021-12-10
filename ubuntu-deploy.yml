@@ -58,7 +58,7 @@
       tags: security
     - role: geerlingguy.firewall
       tags: firewall
-    - roles: geerlingguy.ntp
+    - role: geerlingguy.ntp
       tags: ntp
 
   tasks:
