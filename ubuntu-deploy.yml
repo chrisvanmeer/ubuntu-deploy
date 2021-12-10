@@ -88,7 +88,7 @@
       tags: post
       
     - name: Reboot warning if needed
-       debug:
-         msg: "Please reboot your system"
-       when: reboot_required_file.stat.exists
-       tags: post
+      debug:
+        msg: "Please reboot your system"
+      when: reboot_required_file.stat.exists
+      tags: post
