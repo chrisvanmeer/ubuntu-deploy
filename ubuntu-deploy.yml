@@ -81,6 +81,19 @@
       tags: ntp
 
   tasks:
+  
+    - name: Remove standard index.html
+      file:
+        path: /var/www/html/index.html
+        state: absent
+      tags: php-post
+      
+    - name: Create Hello World PHP page
+      copy:
+        dest: /var/www/html/index.php
+        content: "<?php echo 'Hello World!'; ?>"
+      tags: php-post
+
     - name: Hush all the login banner stuff
       file:
         path: ~/.hushlogin
