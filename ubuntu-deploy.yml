@@ -1,0 +1,66 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    apache_listen_ip: "127.0.0.1"
+
+    php_version: "8.0"
+    php_packages:
+      - php
+      - php-cli
+      - libapache2-mod-php8.0
+
+    security_ssh_port: "9363"
+
+    firewall_allowed_tcp_ports:
+      - "9363"
+
+    extra_packages:
+      - alpine
+      - apticron
+      - atop
+      - bsdgames
+      - build-essential
+      - certbot
+      - curl
+      - ddgr
+      - git
+      - googler
+      - htop
+      - less
+      - lynx
+      - mailutils
+      - nano
+      - net-tools
+      - nload
+      - telnet
+      - vim
+      - wget
+
+  roles:
+    - role: geerlingguy.apache
+      tags: apache
+    - role: geerlingguy.php-versions
+      tags: php
+    - role: geerlingguy.php
+      tags: php
+    - role: geerlingguy.php-mysql
+      tags: php
+    - role: geerlingguy.mysql
+      tags: mysql
+    - role: geerlingguy.docker
+      tags: docker
+    - role: geerlingguy.postfix
+      tags: postfix
+    - role: geerlingguy.security
+      tags: security
+    - role: geerlingguy.firewall
+      tags: firewall
+
+  tasks:
+    - name: Install the extra packages
+      apt:
+        name: "{{ extra_packages }}"
+        state: present
