@@ -116,7 +116,8 @@
         path: /var/run/reboot-required
         get_md5: no
       tags: post
-      
+
+  post_tasks:
     - name: Reboot warning if needed
       debug:
         msg: "Please reboot your system"
