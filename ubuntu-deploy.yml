@@ -82,7 +82,6 @@
       tags: ntp
 
   tasks:
-  
     - name: Remove standard index.html
       file:
         path: /var/www/html/index.html
