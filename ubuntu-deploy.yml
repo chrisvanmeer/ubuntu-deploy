@@ -47,6 +47,11 @@
        state: present
        update_cache: true
 
+    - name: Upgrade Ansible
+      apt:
+        name: ansible
+        state: latest
+
   roles:
     - role: geerlingguy.apache
       tags: apache
