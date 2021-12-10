@@ -85,8 +85,10 @@
       stat:
         path: /var/run/reboot-required
         get_md5: no
-        
+      tags: post
+      
     - name: Reboot warning
       debug:
         msg: "Please reboot your system"
       when: reboot_required_file.stat.exists
+      tags: post
