@@ -42,15 +42,9 @@
       - wget
       
     pre_tasks:
-    - name: Run whoami without become.
-      command: whoami
-      become: false
-      register: whoami
-      tags: docker
-
     - name: Set a fact with the user name.
       set_fact:
-        docker_users: "{{ whoami.stdout }}"      
+        docker_users: "{{ ansible_user_id }}"      
       tags: docker
 
     - debug:
