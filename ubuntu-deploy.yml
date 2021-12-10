@@ -62,3 +62,21 @@
       apt:
         name: "{{ extra_packages }}"
         state: present
+      tags: extra
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+        update_cache: yes
+      tags: apt
+
+    - name: Autoclean apt
+      apt:
+        autoclean: yes
+      tags: apt
+        
+    - name: Autoremove apt
+      apt:
+        autoremove: yes
+      tags: apt
+        
