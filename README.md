@@ -1,4 +1,4 @@
-# ubuntu-install
+# ubuntu-deploy
 Install for my personal Ubuntu systems
 
 ### Update apt and install Ansible
