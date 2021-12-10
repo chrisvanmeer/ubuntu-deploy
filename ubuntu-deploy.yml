@@ -41,7 +41,7 @@
       - vim
       - wget
       
-    pre_tasks:
+  pre_tasks:
     - name: Set a fact with the user name.
       become: false
       set_fact: docker_users="[{{ ansible_user_id }}]"
