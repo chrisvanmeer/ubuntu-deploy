@@ -48,10 +48,6 @@
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
       tags: docker
 
-    - debug:
-        var: docker_users
-      tags: docker
-
     - name: Make sure hirsute universe repository is enabled for Ansible > 2.9.6
       apt_repository:
        repo: deb http://archive.ubuntu.com/ubuntu hirsute universe
