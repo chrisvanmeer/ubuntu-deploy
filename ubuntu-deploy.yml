@@ -44,7 +44,8 @@
   pre_tasks:
     - name: Set a fact with the user name.
       become: false
-      set_fact: docker_users="[{{ ansible_user_id }}]"
+      set_fact:
+        docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
       tags: docker
 
     - debug:
