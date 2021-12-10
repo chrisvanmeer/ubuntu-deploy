@@ -1,5 +1,5 @@
 # ubuntu-install
-Vanilla install for my personal Ubuntu systems
+Install for my personal Ubuntu systems
 
 ### Update apt and install Ansible
 ```
