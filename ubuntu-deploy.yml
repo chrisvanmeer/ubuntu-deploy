@@ -5,6 +5,9 @@
 
   vars:
     apache_listen_ip: "127.0.0.1"
+    
+    docker_users:
+      - {{ username_on_the_host }}
 
     php_version: "8.0"
     php_enable_apc: false
@@ -42,6 +45,11 @@
       - wget
       
   pre_tasks:
+    - name: Get the username running the deploy
+      become: false
+      local_action: command whoami
+      register: username_on_the_host
+
     - name: Make sure hirsute universe repository is enabled for Ansible > 2.9.6
       apt_repository:
        repo: deb http://archive.ubuntu.com/ubuntu hirsute universe
