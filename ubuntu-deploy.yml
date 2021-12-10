@@ -87,13 +87,8 @@
         get_md5: no
       tags: post
       
-    - name: Reboot if needed
-      reboot:
-        msg: "Reboot initiated by Ansible due to kernel updates"
-        connect_timeout: 5
-        reboot_timeout: 300
-        pre_reboot_delay: 0
-        post_reboot_delay: 30
-        test_command: uptime
-      when: reboot_required_file.stat.exists
-      tags: post
+    - name: Reboot warning if needed
+       debug:
+         msg: "Please reboot your system"
+       when: reboot_required_file.stat.exists
+       tags: post
