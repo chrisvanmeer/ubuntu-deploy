@@ -17,5 +17,5 @@ ansible-playbook ubuntu-deploy.yml
 ```
 or
 ```
-ansible-pull --url https://raw.githubusercontent.com/chrisvanmeer/ubuntu-deploy/main/ubuntu-deploy.yml
+ansible-pull --url https://github.com/chrisvanmeer/ubuntu-deploy ubuntu-deploy.yml
 ```
