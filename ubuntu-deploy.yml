@@ -47,6 +47,10 @@
       local_action: command whoami
       register: docker_users
       tags: docker
+      
+    - debug:
+        var: docker_users
+      tags: docker
 
     - name: Make sure hirsute universe repository is enabled for Ansible > 2.9.6
       apt_repository:
