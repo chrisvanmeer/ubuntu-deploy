@@ -12,10 +12,8 @@
       - php-cli
       - libapache2-mod-php8.0
 
-    security_ssh_port: "9363"
-
     firewall_allowed_tcp_ports:
-      - "9363"
+      - "22"
 
     extra_packages:
       - alpine
