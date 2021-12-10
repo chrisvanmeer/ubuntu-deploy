@@ -58,6 +58,12 @@
       tags: firewall
 
   tasks:
+    - name: Hush all the login banner stuff
+      file:
+        path: ~/.hushlogin
+        state: touch
+      tags: hush
+
     - name: Install the extra packages
       apt:
         name: "{{ extra_packages }}"
