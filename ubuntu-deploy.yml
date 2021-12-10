@@ -4,7 +4,7 @@
   become: true
 
   vars:
-    ubuntu_major_version: 19
+    ubuntu_major_version: 20
     
     apache_listen_ip: "127.0.0.1"
     
