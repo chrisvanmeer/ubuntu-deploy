@@ -41,13 +41,19 @@
       - vim
       - wget
       
-  pre_tasks:
-    - name: Get the username running the deploy
+    pre_tasks:
+    - name: Run whoami without become.
+      command: whoami
+      changed_when: false
       become: false
-      vars: {{ lookup('env', 'USER') }}
-      register: docker_users
+      register: whoami
       tags: docker
-      
+
+    - name: Set a fact with the user name.
+      set_fact:
+        docker_users: "{{ whoami.stdout }}"      
+      tags: docker
+
     - debug:
         var: docker_users
       tags: docker
