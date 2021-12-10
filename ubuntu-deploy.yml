@@ -45,8 +45,6 @@
       
   pre_tasks:
     - name: Failed, this is not Ubuntu 20...
-      debug:
-        msg: "Failed, this is not Ubuntu 20..."
       meta: end_play
       when: ansible_distribution_major_version != ubuntu_major_version
   
