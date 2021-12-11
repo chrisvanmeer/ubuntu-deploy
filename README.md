@@ -17,7 +17,11 @@ I pretty much use default settings on Jeff Geerling's roles. The only real chang
 ```
 apache_listen_ip: "*"
 ```
-And then you might want to add the tcp/80 and tcp/443 port to the firewall open ports:  
+I run the sshd on the default tcp/22 port, but you can change this in the following variable in the playbook:
+```
+security_ssh_port: <port>
+```
+And then you might want to add the tcp/80 and tcp/443 port to the firewall open ports and possibly change tcp/22 to the port you have assigned to the sshd:  
 ```
 firewall_allowed_tcp_ports:
       - "22"
@@ -33,5 +37,5 @@ ansible-galaxy install -r requirements.yml
 ansible-playbook ubuntu-20-deploy.yml
 ```
 
-## Drink coffee
-Running this setup usually takes about 15 minutes. Perfect time for a coffee break.
+## :coffee: Coffee break
+Running this setup usually a maximum of 10 minutes. Perfect time for a coffee break.
