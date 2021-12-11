@@ -12,6 +12,19 @@ sudo apt-add-repository ppa:ansible/ansible -y && sudo apt update && sudo apt in
 git clone https://github.com/chrisvanmeer/ubuntu-deploy.git
 ```
 
+## Role variables
+I pretty much use default settings on Jeff Geerling's roles. The only real change is that for my systems, I sometimes install Apache to listen on localhost only. If you want to change this, change the following variable in the playbook to:  
+```
+apache_listen_ip: "*"
+```
+And then you might want to add the tcp/80 and tcp/443 port to the firewall open ports:  
+```
+firewall_allowed_tcp_ports:
+      - "22"
+      - "80"
+      - "443"
+```
+
 ## Install required Ansible roles and run the playbook
 Using a playbook for Ubuntu 20.04 LTS for this example
 ```
