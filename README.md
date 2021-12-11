@@ -2,6 +2,7 @@
 Install for my personal Ubuntu systems
 
 ## Install pip and latest version of Ansible
+Intentially not installing through package manager due to a bug in Ansible 2.9.6 which is the default version for Ubuntu 20.04 LTS.
 ```
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py --user
