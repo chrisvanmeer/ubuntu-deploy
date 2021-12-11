@@ -6,9 +6,9 @@ Install for my personal Ubuntu systems
 sudo apt update && sudo apt install cowsay ansible -y
 ```
 
-### Install needed Ansible roles
+### Install required Ansible roles
 ```
-ansible-galaxy install geerlingguy.apache geerlingguy.mysql geerlingguy.php geerlingguy.php-mysql geerlingguy.security geerlingguy.firewall geerlingguy.php-versions geerlingguy.docker geerlingguy.postfix geerlingguy.ntp
+ansible-galaxy install -r requirements.yml
 ```
 
 ### Deploy the magic
