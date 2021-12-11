@@ -60,31 +60,6 @@
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
       tags: docker
 
-    - name: Make sure hirsute universe repository is enabled for Ansible > 2.9.6
-      apt_repository:
-        repo: deb http://archive.ubuntu.com/ubuntu hirsute universe
-        state: present
-        update_cache: true
-      when: "ansible_version.full is version('2.9.6', '==')"
-
-    - name: Upgrade Ansible
-      apt:
-        name: ansible
-        state: latest
-      when: "ansible_version.full is version('2.9.6', '==')"
-
-    - name: Make sure python is done
-      pause:
-        seconds: 10
-      when: "ansible_version.full is version('2.9.6', '==')"
-        
-    - name: Make sure hirsute universe repository is removed again
-      apt_repository:
-        repo: deb http://archive.ubuntu.com/ubuntu hirsute universe
-        state: absent
-        update_cache: true
-      when: "ansible_version.full is version('2.9.6', '==')"
-
   roles:
     - role: geerlingguy.apache
       tags: apache
