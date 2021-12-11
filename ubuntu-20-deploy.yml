@@ -46,8 +46,8 @@
   pre_tasks:
     - name: Fail when Linux distribution does not match
       fail:
-        msg: "Failed, this is not Ubuntu...but {{ ansible_user_gecos }}"
-      when: ansible_user_gecos != "Ubuntu"
+        msg: "Failed, this is not Ubuntu...but {{ ansible_kernel_version.id }}"
+      when: ansible_kernel_version.id != "Ubuntu"
 
     - name: Fail when major OS version does not match
       fail:
