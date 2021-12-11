@@ -39,4 +39,4 @@ ansible-playbook ubuntu-20-deploy.yml
 ```
 
 ## :coffee: Coffee break
-Running this setup usually a maximum of 10 minutes. Perfect time for a coffee break.
+Running this setup usually takes a maximum of 10 minutes. Perfect time for a coffee break.
