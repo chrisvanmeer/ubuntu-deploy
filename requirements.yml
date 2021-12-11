@@ -1,0 +1,12 @@
+---
+roles:
+  - name: geerlingguy.apache
+  - name: geerlingguy.docker
+  - name: geerlingguy.firewall
+  - name: geerlingguy.mysql
+  - name: geerlingguy.ntp
+  - name: geerlingguy.php
+  - name: geerlingguy.php-mysql
+  - name: geerlingguy.php-versions
+  - name: geerlingguy.postfix
+  - name: geerlingguy.security
