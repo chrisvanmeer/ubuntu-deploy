@@ -1,13 +1,10 @@
 # ubuntu-deploy
 Install for my personal Ubuntu systems
 
-## Install pip and latest version of Ansible
-Intentially not installing through package manager due to a bug in Ansible 2.9.6 which is the default version for Ubuntu 20.04 LTS.
+## Install Ansible PPA and use that to install Ansible
+Intentially doing this because the default Ansible version in Ubuntu 20.04 is 2.9.6 that has a bug that breaks an NTP role.
 ```
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python3 get-pip.py --user
-sudo python3 get-pip.py
-sudo python3 -m pip install ansible
+sudo apt-add-repository ppa:ansible/ansible -y && sudo apt update && sudo apt install ansible -y
 ```
 
 ## Install required Ansible roles
