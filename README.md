@@ -32,3 +32,6 @@ cd ubuntu-deploy
 ansible-galaxy install -r requirements.yml
 ansible-playbook ubuntu-20-deploy.yml
 ```
+
+## Drink coffee
+Running this setup usually takes about 15 minutes. Perfect time for a coffee break.
