@@ -1,9 +1,9 @@
 # ubuntu-deploy
 Install for my personal Ubuntu systems
 
-## Update apt and install Ansible
+## Update package manager and install Ansible
 ```
-sudo apt update && sudo apt install cowsay ansible -y
+sudo apt update && sudo apt install ansible -y
 ```
 
 ## Install required Ansible roles
