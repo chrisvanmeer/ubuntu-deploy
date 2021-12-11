@@ -46,7 +46,7 @@
   pre_tasks:
     - name: Fail when OS family does not match
       fail:
-        msg: "Failed, this is not Ubuntu...but {{ ansible_os_family }}
+        msg: "Failed, this is not Ubuntu...but {{ ansible_os_family }}"
       when: ansible_os_family != "RedHat"
 
     - name: Fail when major OS version does not match
