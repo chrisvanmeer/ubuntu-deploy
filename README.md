@@ -28,6 +28,7 @@ firewall_allowed_tcp_ports:
       - "80"
       - "443"
 ```
+In the `xtra_packages` variable, I keep a list of the packages I use frequently.  
 
 ## Install required Ansible roles and run the playbook
 Using a playbook for Ubuntu 20.04 LTS for this example
