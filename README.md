@@ -1,9 +1,12 @@
 # ubuntu-deploy
 Install for my personal Ubuntu systems
 
-## Update package manager and install Ansible
+## Install pip and latest version of Ansible
 ```
-sudo apt update && sudo apt install ansible -y
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py --user
+sudo python3 get-pip.py
+sudo python3 -m pip install ansible
 ```
 
 ## Install required Ansible roles
