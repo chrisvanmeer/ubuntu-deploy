@@ -4,10 +4,10 @@
   become: true
 
   vars:
-    ubuntu_major_version: 20
+    _ubuntu_major_version: 20
     
     apache_listen_ip: "127.0.0.1"
-    
+        
     php_version: "8.0"
     php_enable_apc: false
     php_packages:
@@ -20,7 +20,9 @@
       
     ntp_timezone: "Europe/Amsterdam"
 
-    extra_packages:
+    security_ssh_port: 22
+
+    xtra_packages:
       - alpine
       - apticron
       - atop
@@ -52,7 +54,7 @@
     - name: Fail when major OS version does not match
       fail:
         msg: "Failed, this is not Ubuntu 20...but {{ ansible_distribution_major_version }}"
-      when: ansible_distribution_major_version|int != ubuntu_major_version|int
+      when: ansible_distribution_major_version|int != _ubuntu_major_version|int
   
     - name: Set a fact with the current user name to add it to the docker group later
       become: false
@@ -104,9 +106,9 @@
 
     - name: Install the extra packages
       apt:
-        name: "{{ extra_packages }}"
+        name: "{{ xtra_packages }}"
         state: present
-      tags: extra
+      tags: xtra
 
     - name: Upgrade all packages
       apt:
