@@ -7,6 +7,11 @@ Intentially doing this because the default Ansible version in Ubuntu 20.04 is 2.
 sudo apt-add-repository ppa:ansible/ansible -y && sudo apt update && sudo apt install ansible -y
 ```
 
+## Clone this repo on the system you want to configure
+```
+git clone https://github.com/chrisvanmeer/ubuntu-deploy.git
+```
+
 ## Install required Ansible roles and run the playbook
 Using a playbook for Ubuntu 20.04 LTS for this example
 ```
