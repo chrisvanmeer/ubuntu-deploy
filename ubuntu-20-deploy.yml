@@ -54,7 +54,7 @@
         msg: "Failed, this is not Ubuntu 20...but {{ ansible_distribution_major_version }}"
       when: ansible_distribution_major_version|int != ubuntu_major_version|int
   
-    - name: Set a fact with the user name.
+    - name: Set a fact with the current user name to add it to the docker group later
       become: false
       set_fact:
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
