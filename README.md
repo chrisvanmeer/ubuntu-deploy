@@ -30,11 +30,14 @@ firewall_allowed_tcp_ports:
 ```
 In the `xtra_packages` variable, I keep a list of the packages I use frequently.  
 
-## Install required Ansible roles and run the playbook
-Using a playbook for Ubuntu 20.04 LTS for this example
+## Install required Ansible roles
 ```
 cd ubuntu-deploy
 ansible-galaxy install -r requirements.yml
+```
+## Run the playbook
+Using a playbook for Ubuntu 20.04 LTS for this example
+```
 ansible-playbook ubuntu-20-deploy.yml
 ```
 
