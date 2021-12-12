@@ -63,6 +63,8 @@
       tags: docker
 
   roles:
+    - role: geerlingguy.certbot
+      tags: certbot
     - role: geerlingguy.apache
       tags: apache
     - role: geerlingguy.php-versions
