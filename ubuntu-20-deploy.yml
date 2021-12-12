@@ -9,11 +9,11 @@
     apache_listen_ip: "127.0.0.1"
         
     php_version: "8.1"
-    php_enable_apc: false
     php_packages:
-      - php
-      - php-cli
+      - "php{{ php_version }}"
+      - "php{{ php_version }}-cli"
       - "libapache2-mod-php{{ php_version }}"
+    php_enable_apc: false
 
     firewall_allowed_tcp_ports:
       - "22"
