@@ -8,12 +8,12 @@
     
     apache_listen_ip: "127.0.0.1"
         
-    php_version: "8.0"
+    php_version: "8.1"
     php_enable_apc: false
     php_packages:
       - php
       - php-cli
-      - libapache2-mod-php8.0
+      - "libapache2-mod-php{{ php_version }}"
 
     firewall_allowed_tcp_ports:
       - "22"
