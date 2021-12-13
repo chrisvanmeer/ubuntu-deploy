@@ -5,9 +5,11 @@
 
   vars:
     _ubuntu_major_version: 20
-    
+
     apache_listen_ip: "127.0.0.1"
-        
+    apache_listen_port: 80
+    apache_listen_port_ssl: 443
+
     php_version: "8.1"
     php_packages:
       - "php{{ php_version }}"
@@ -15,12 +17,26 @@
       - "libapache2-mod-php{{ php_version }}"
     php_enable_apc: false
 
-    firewall_allowed_tcp_ports:
-      - "22"
-      
+    # firewall_allowed_tcp_ports:
+    #   - "22"
+
     ntp_timezone: "Europe/Amsterdam"
 
     security_ssh_port: 22
+
+    ufw_rules:
+      - rule: allow
+        to_port: "{{ security_ssh_port }}"
+        protocol: tcp
+        comment: "Allow incoming SSH"
+      # - rule: allow
+      #   to_port: "{{ apache_listen_port }}"
+      #   protocol: tcp
+      #   comment: "Allow incoming HTTP"
+      # - rule: allow
+      #   to_port: "{{ apache_listen_port_ssl }}"
+      #   protocol: tcp
+      #   comment: "Allow incoming HTTPS"
 
     xtra_packages:
       - alpine
@@ -44,7 +60,7 @@
       - telnet
       - vim
       - wget
-      
+
   pre_tasks:
     - name: Fail when Linux distribution does not match
       fail:
@@ -55,7 +71,7 @@
       fail:
         msg: "Failed, this is not Ubuntu 20...but {{ ansible_distribution_major_version }}"
       when: ansible_distribution_major_version|int != _ubuntu_major_version|int
-  
+
     - name: Set a fact with the current user name to add it to the docker group later
       become: false
       set_fact:
@@ -79,10 +95,12 @@
       tags: postfix
     - role: geerlingguy.security
       tags: security
-    - role: geerlingguy.firewall
-      tags: firewall
+    # - role: geerlingguy.firewall
+    #   tags: firewall
     - role: geerlingguy.ntp
       tags: ntp
+    - role: oefenweb.ufw
+      tags: ufw
 
   tasks:
     - name: Remove standard index.html
@@ -90,7 +108,7 @@
         path: /var/www/html/index.html
         state: absent
       tags: php-post
-      
+
     - name: Create Hello World PHP page
       copy:
         dest: /var/www/html/index.php
@@ -120,7 +138,7 @@
       apt:
         autoclean: yes
       tags: apt
-        
+
     - name: Autoremove apt
       apt:
         autoremove: yes
