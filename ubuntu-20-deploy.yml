@@ -95,8 +95,6 @@
       tags: postfix
     - role: geerlingguy.security
       tags: security
-    # - role: geerlingguy.firewall
-    #   tags: firewall
     - role: geerlingguy.ntp
       tags: ntp
     - role: oefenweb.ufw

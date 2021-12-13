@@ -18,7 +18,7 @@ git clone https://github.com/chrisvanmeer/ubuntu-deploy.git
 
 ## Role variables
 
-I use roles from Jeff Geerling ([@geerlingguy](https://github.com/geerlingguy)) and pretty much use the default settings. The only real change is that for my systems, I sometimes install Apache to listen on localhost only. If you want to change this, change the following variable in the playbook to:
+I use a lot of roles from Jeff Geerling ([@geerlingguy](https://github.com/geerlingguy)) and pretty much use the default settings. The only real change is that for my systems, I sometimes install Apache to listen on localhost only. If you want to change this, change the following variable in the playbook to:
 
 ```
 apache_listen_ip: "*"

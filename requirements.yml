@@ -3,7 +3,6 @@ roles:
   - name: geerlingguy.apache
   - name: geerlingguy.certbot
   - name: geerlingguy.docker
-  # - name: geerlingguy.firewall
   - name: geerlingguy.mysql
   - name: geerlingguy.ntp
   - name: geerlingguy.php
