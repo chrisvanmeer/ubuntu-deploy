@@ -54,6 +54,7 @@
       - less
       - lynx
       - mailutils
+      - multitail
       - nano
       - net-tools
       - nload
