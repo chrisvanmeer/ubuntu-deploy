@@ -61,6 +61,7 @@
       - telnet
       - vim
       - wget
+      - whois
 
   pre_tasks:
     - name: Fail when Linux distribution does not match
