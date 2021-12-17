@@ -109,8 +109,9 @@
 
   tasks:
 
-    - block:
-      - name: Set new new hostname
+    - name: Set new hostname and add it to the hosts file
+      block:
+      - name: Set new hostname
         hostname:
           name: "{{ new_hostname }}"
 
