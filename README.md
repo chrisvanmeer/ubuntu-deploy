@@ -48,7 +48,7 @@ And then you might want to add the tcp/80 and tcp/443 port to the firewall open 
         comment: 'Allow incoming HTTPS'
 ```
 
-In the `xtra_packages` variable, I keep a list of the packages I use frequently.
+In the `xtra_apt_packages` variable, I keep a list of the packages I use frequently.
 
 ## Install required Ansible roles
 
