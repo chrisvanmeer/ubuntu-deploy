@@ -94,7 +94,7 @@
 
     - name: Ensure openssh-server is started and enabled
       service:
-        name: openssh-server
+        name: ssh
         state: started
         enabled: yes
 
