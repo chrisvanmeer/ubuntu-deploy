@@ -85,6 +85,19 @@
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
       tags: docker
 
+    - name: Ensure openssh-server is installed
+      apt:
+        name:
+          - openssh-server
+          - openssh-client
+        state: present
+
+    - name: Ensure openssh-server is started and enabled
+      service:
+        name: openssh-server
+        state: started
+        enabled: yes
+
   roles:
     - role: geerlingguy.certbot
       tags: certbot
