@@ -6,6 +6,8 @@
   vars:
     _ubuntu_major_version: 20
 
+    new_hostname: "yggdrasil"
+
     apache_listen_ip: "127.0.0.1"
     apache_listen_port: 80
     apache_listen_port_ssl: 443
@@ -38,7 +40,7 @@
       #   protocol: tcp
       #   comment: "Allow incoming HTTPS"
 
-    xtra_packages:
+    xtra_apt_packages:
       - alpine
       - apticron
       - atop
@@ -62,6 +64,9 @@
       - vim
       - wget
       - whois
+
+    xtra_snap_packages:
+      - multipass
 
   pre_tasks:
     - name: Fail when Linux distribution does not match
@@ -103,6 +108,20 @@
       tags: ufw
 
   tasks:
+
+    - block:
+      - name: Set new new hostname
+        hostname:
+          name: "{{ new_hostname }}"
+
+      - name: Add hostname to hosts file
+        lineinfile:
+          path: /etc/hosts
+          regexp: '^127\.0\.0\.1[ \t]+localhost'
+          line: '127.0.0.1 localhost {{ new_hostname }}'
+          state: present
+      when: ansible_hostname != new_hostname
+
     - name: Remove standard index.html
       file:
         path: /var/www/html/index.html
@@ -122,9 +141,15 @@
       become: false
       tags: hush
 
-    - name: Install the extra packages
+    - name: Install the extra apt packages
       apt:
-        name: "{{ xtra_packages }}"
+        name: "{{ xtra_apt_packages }}"
+        state: present
+      tags: xtra
+
+    - name: Install the extra snap packages
+      snap:
+        name: "{{ xtra_snap_packages }}"
         state: present
       tags: xtra
 
