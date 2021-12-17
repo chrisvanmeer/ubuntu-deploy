@@ -7,7 +7,7 @@ Install for my personal Ubuntu systems
 Intentially doing this because the default Ansible version in Ubuntu 20.04 is 2.9.6 that has a bug that breaks an NTP role.
 
 ```
-sudo apt-add-repository ppa:ansible/ansible -y && sudo apt update && sudo apt install ansible -y
+sudo apt-add-repository ppa:ansible/ansible -y && sudo apt update && sudo apt install git ansible -y
 ```
 
 ## Clone this repo on the system you want to configure
