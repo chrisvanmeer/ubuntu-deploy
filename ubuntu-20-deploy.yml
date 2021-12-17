@@ -121,6 +121,7 @@
           line: '127.0.0.1 localhost {{ new_hostname }}'
           state: present
       when: ansible_hostname != new_hostname
+      tags: hostname
 
     - name: Remove standard index.html
       file:
