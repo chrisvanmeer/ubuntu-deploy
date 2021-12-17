@@ -6,8 +6,6 @@
   vars:
     _ubuntu_major_version: 20
 
-    new_hostname: "yggdrasil"
-
     apache_listen_ip: "127.0.0.1"
     apache_listen_port: 80
     apache_listen_port_ssl: 443
@@ -121,21 +119,6 @@
       tags: ufw
 
   tasks:
-
-    - name: Set new hostname and add it to the hosts file
-      block:
-      - name: Set new hostname
-        hostname:
-          name: "{{ new_hostname }}"
-
-      - name: Add hostname to hosts file
-        lineinfile:
-          path: /etc/hosts
-          regexp: '^127\.0\.0\.1[ \t]+localhost'
-          line: '127.0.0.1 localhost {{ new_hostname }}'
-          state: present
-      when: ansible_hostname != new_hostname
-      tags: hostname
 
     - name: Remove standard index.html
       file:
