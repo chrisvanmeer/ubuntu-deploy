@@ -67,6 +67,7 @@
       - net-tools
       - nload
       - screen
+      - steam
       - telnet
       - tilix
       - tmux
@@ -79,7 +80,6 @@
     xtra_snap_packages:
       - bpytop
       - multipass
-      # - linux-steam-integration
       - telegram-desktop
 
     xtra_classic_snap_packages:
