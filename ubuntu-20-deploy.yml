@@ -164,7 +164,7 @@
       register: hush
       tags: hush
 
-    - name: Hush all the login banner stuff
+    - name: Create a .hushlogin file if it not exists
       file:
         path: ~/.hushlogin
         state: touch
