@@ -58,8 +58,9 @@
       - nano
       - net-tools
       - nload
+      - screen
       - telnet
-      - tilix
+      - tmux
       - vim
       - wget
       - whois
