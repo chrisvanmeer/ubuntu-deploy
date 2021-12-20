@@ -79,8 +79,8 @@
     xtra_snap_packages:
       # - bpytop
       # - multipass
-      - linux-steam-integration
-      # - telegram-desktop
+      # - linux-steam-integration
+      - telegram-desktop
 
     xtra_classic_snap_packages:
       - code
