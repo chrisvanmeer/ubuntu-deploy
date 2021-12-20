@@ -17,9 +17,6 @@
       - "libapache2-mod-php{{ php_version }}"
     php_enable_apc: false
 
-    # firewall_allowed_tcp_ports:
-    #   - "22"
-
     ntp_timezone: "Europe/Amsterdam"
 
     security_ssh_port: 22
@@ -202,15 +199,14 @@
         name: "{{ xtra_snap_packages }}"
         classic: yes
         state: present
-      tags: xtra
+      tags: xtra, snap
 
     - name: Install the extra snap packages with classic parameter
       snap:
         name: "{{ xtra_classic_snap_packages }}"
         classic: yes
         state: present
-      tags: xtra
-
+      tags: xtra, snap, snap-classic
 
     - name: Upgrade all packages
       apt:
