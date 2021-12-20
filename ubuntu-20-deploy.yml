@@ -78,9 +78,9 @@
 
     xtra_snap_packages:
       - bpytop
-      - multipass
-      - linux-steam-integration
-      - telegram-desktop
+      # - multipass
+      # - linux-steam-integration
+      # - telegram-desktop
 
     xtra_classic_snap_packages:
       - code
@@ -206,7 +206,7 @@
         name: "{{ xtra_classic_snap_packages }}"
         classic: yes
         state: present
-      tags: xtra, snap, snap-classic
+      tags: xtra, snap-classic
 
     - name: Upgrade all packages
       apt:
