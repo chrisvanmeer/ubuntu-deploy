@@ -77,9 +77,9 @@
       - whois
 
     xtra_snap_packages:
-      - bpytop
+      # - bpytop
       # - multipass
-      # - linux-steam-integration
+      - linux-steam-integration
       # - telegram-desktop
 
     xtra_classic_snap_packages:
