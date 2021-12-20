@@ -38,6 +38,10 @@
       #   protocol: tcp
       #   comment: "Allow incoming HTTPS"
 
+    ppa_repos:
+      - "ppa:agornostal/ulauncher"
+      - "ppa:geary-team/releases"
+
     xtra_apt_packages:
       - alpine
       - apticron
@@ -48,6 +52,7 @@
       - curl
       - ddgr
       - flameshot
+      - geary
       - git
       - gimp
       - gitsome
@@ -159,11 +164,12 @@
       become: false
       tags: hush
 
-    - name: Add PPA for Ulauncher
+    - name: Add needed PPA's
       apt_repository:
-        repo: "ppa:agornostal/ulauncher"
+        repo: "{{ item }}"
         state: present
         validate_certs: no
+      loop: "{{ ppa_repos }}"
       tags: apt-pre
 
     - name: Add specified repositories into sources list using specified filename
