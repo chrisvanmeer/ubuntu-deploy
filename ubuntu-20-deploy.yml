@@ -168,13 +168,12 @@
       apt_repository:
         repo: "{{ item }}"
         state: present
-        validate_certs: no
       loop: "{{ ppa_repos }}"
       tags: apt-pre
 
-    - name: Add specified repositories into sources list using specified filename
+    - name: Add specified repositories for Google Chrome
       apt_repository:
-        repo: "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
+        repo: deb http://dl.google.com/linux/chrome/deb/ stable main
         state: present
         filename: google-chrome
       tags: apt-pre
