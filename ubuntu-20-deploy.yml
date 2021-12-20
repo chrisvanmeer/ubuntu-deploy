@@ -197,12 +197,11 @@
         state: present
       tags: xtra
 
-    - name: Install the extra snap packages
-      snap:
-        name: "{{ item }}"
-        state: present
-      loop: "{{ xtra_snap_packages }}"
-      tags: xtra
+    # - name: Install the extra snap packages
+    #   snap:
+    #     name: "{{ xtra_snap_packages }}"
+    #     state: present
+    #   tags: xtra
 
     - name: Install the extra snap packages with classic parameter
       snap:
