@@ -59,11 +59,13 @@
       - net-tools
       - nload
       - telnet
+      - tilix
       - vim
       - wget
       - whois
 
     xtra_snap_packages:
+      - bpytop
       - multipass
 
   pre_tasks:
