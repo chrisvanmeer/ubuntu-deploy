@@ -37,7 +37,6 @@
 
     ppa_repos:
       - "ppa:agornostal/ulauncher"
-      # - "ppa:geary-team/releases"
 
     xtra_apt_packages:
       - alpine
@@ -49,7 +48,6 @@
       - curl
       - ddgr
       - flameshot
-      # - geary
       - git
       - gimp
       - gitsome
@@ -85,7 +83,6 @@
     xtra_classic_snap_packages:
       - code
       - sublime-text
-
 
   pre_tasks:
     - name: Fail when Linux distribution does not match
