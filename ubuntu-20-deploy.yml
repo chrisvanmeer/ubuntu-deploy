@@ -157,11 +157,19 @@
         content: "<?php echo 'Hello World!'; ?>"
       tags: php-post
 
+    - name: Check if .hushlogin exists
+      stat:
+        path: ~/.hushlogin
+      become: false
+      register: hush
+      tags: hush
+
     - name: Hush all the login banner stuff
       file:
         path: ~/.hushlogin
         state: touch
       become: false
+      when: not hush.stat.exists
       tags: hush
 
     - name: Add needed PPA's
