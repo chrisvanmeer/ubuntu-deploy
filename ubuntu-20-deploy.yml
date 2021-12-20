@@ -197,11 +197,12 @@
         state: present
       tags: xtra
 
-    # - name: Install the extra snap packages
-    #   snap:
-    #     name: "{{ xtra_snap_packages }}"
-    #     state: present
-    #   tags: xtra
+    - name: Install the extra snap packages
+      snap:
+        name: "{{ xtra_snap_packages }}"
+        classic: yes
+        state: present
+      tags: xtra
 
     - name: Install the extra snap packages with classic parameter
       snap:
