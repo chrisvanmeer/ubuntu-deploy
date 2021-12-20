@@ -47,6 +47,7 @@
       - certbot
       - curl
       - ddgr
+      - flameshot
       - git
       - gitsome
       - google-chrome-stable
