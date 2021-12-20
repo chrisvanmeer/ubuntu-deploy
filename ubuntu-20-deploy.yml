@@ -40,7 +40,7 @@
 
     ppa_repos:
       - "ppa:agornostal/ulauncher"
-      - "ppa:geary-team/releases"
+      # - "ppa:geary-team/releases"
 
     xtra_apt_packages:
       - alpine
@@ -52,7 +52,7 @@
       - curl
       - ddgr
       - flameshot
-      - geary
+      # - geary
       - git
       - gimp
       - gitsome
