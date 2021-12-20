@@ -54,6 +54,7 @@
       - google-chrome-stable
       - googler
       - htop
+      - iperf3
       - less
       - lynx
       - mailutils
@@ -69,6 +70,7 @@
       - tmux
       - ulauncher
       - vim
+      - vlc
       - wget
       - whois
 
