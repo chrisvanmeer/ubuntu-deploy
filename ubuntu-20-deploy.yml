@@ -78,6 +78,7 @@
     xtra_snap_packages:
       - bpytop
       - multipass
+      - simplenote
       - telegram-desktop
 
     xtra_classic_snap_packages:
