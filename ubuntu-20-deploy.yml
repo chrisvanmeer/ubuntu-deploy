@@ -95,7 +95,7 @@
       become: false
       set_fact:
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
-      tags: docker
+      tags: docker, core
 
     - name: Ensure openssh-server is installed
       apt:
@@ -112,25 +112,25 @@
 
   roles:
     - role: geerlingguy.certbot
-      tags: certbot
+      tags: certbot, core
     - role: geerlingguy.apache
-      tags: apache
+      tags: apache, core
     - role: geerlingguy.php-versions
-      tags: php
+      tags: php, core
     - role: geerlingguy.php-mysql
-      tags: php
+      tags: php, core
     - role: geerlingguy.mysql
-      tags: mysql
+      tags: mysql, core
     - role: geerlingguy.docker
-      tags: docker
+      tags: docker, core
     - role: geerlingguy.postfix
-      tags: postfix
+      tags: postfix, core
     - role: geerlingguy.security
-      tags: security
+      tags: security, core
     - role: geerlingguy.ntp
-      tags: ntp
+      tags: ntp, core
     - role: oefenweb.ufw
-      tags: ufw
+      tags: ufw, core
 
   tasks:
 
@@ -138,20 +138,20 @@
       file:
         path: /var/www/html/index.html
         state: absent
-      tags: php-post
+      tags: php-post, core
 
     - name: Create Hello World PHP page
       copy:
         dest: /var/www/html/index.php
         content: "<?php echo 'Hello World!'; ?>"
-      tags: php-post
+      tags: php-post, core
 
     - name: Check if .hushlogin exists
       stat:
         path: ~/.hushlogin
       become: false
       register: hush
-      tags: hush
+      tags: hush, core
 
     - name: Create a .hushlogin file if it not exists
       file:
@@ -159,7 +159,7 @@
         state: touch
       become: false
       when: not hush.stat.exists
-      tags: hush
+      tags: hush, core
 
     - name: Add needed PPA's
       apt_repository:
