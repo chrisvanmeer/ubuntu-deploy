@@ -59,6 +59,7 @@
       - less
       - lynx
       - mailutils
+      - mc
       - multitail
       - nano
       - neofetch
