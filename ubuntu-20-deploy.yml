@@ -87,29 +87,32 @@
       - sublime-text
 
   pre_tasks:
-    - name: Fail when Linux distribution does not match
+    - name: check | Fail when Linux distribution does not match
       fail:
         msg: "Failed, this is not Ubuntu 20...but {{ ansible_distribution }} {{ ansible_distribution_major_version }}"
       when: (ansible_distribution != "Ubuntu") and (ansible_distribution_major_version|int != _ubuntu_major_version|int)
+      tags: check
 
-    - name: Set a fact with the current user name to add it to the docker group later
+    - name: docker | Set a fact with the current user name to add it to the docker group later
       become: false
       set_fact:
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
       tags: docker, core
 
-    - name: Ensure openssh-server is installed
+    - name: ssh | Ensure openssh-server is installed
       apt:
         name:
           - openssh-server
           - openssh-client
         state: present
+      tags: ssh
 
-    - name: Ensure openssh-server is started and enabled
+    - name: ssh | Ensure openssh-server is started and enabled
       service:
         name: ssh
         state: started
         enabled: yes
+      tags: ssh
 
   roles:
     - role: geerlingguy.certbot
@@ -135,26 +138,26 @@
 
   tasks:
 
-    - name: Remove standard index.html
+    - name: php-post | Remove standard index.html
       file:
         path: /var/www/html/index.html
         state: absent
       tags: php-post, core
 
-    - name: Create Hello World PHP page
+    - name: php-post | Create Hello World PHP page
       copy:
         dest: /var/www/html/index.php
         content: "<?php echo 'Hello World!'; ?>"
       tags: php-post, core
 
-    - name: Check if .hushlogin exists
+    - name: hush | Check if .hushlogin exists
       stat:
         path: ~/.hushlogin
       become: false
       register: hush
       tags: hush, core
 
-    - name: Create a .hushlogin file if it not exists
+    - name: hush | Create a .hushlogin file if it not exists
       file:
         path: ~/.hushlogin
         state: touch
@@ -162,70 +165,76 @@
       when: not hush.stat.exists
       tags: hush, core
 
-    - name: Add needed PPA's
+    - name: apt-pre | Add needed PPA's
       apt_repository:
         repo: "{{ item }}"
         state: present
       loop: "{{ ppa_repos }}"
       tags: apt-pre
 
-    - name: Add specified repository for Google Chrome
+    - name: "apt-pre | ensure Google linux signing key present"
+      apt_key:
+        url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+        state: present
+      tags: apt-pre
+
+    - name: apt-pre | Add specified repository for Google Chrome
       apt_repository:
         repo: deb http://dl.google.com/linux/chrome/deb/ stable main
         state: present
         filename: google-chrome
       tags: apt-pre
 
-    - name: Update apt cache
+    - name: xtra | Update apt cache
       apt:
         update_cache: yes
         cache_valid_time: 3600
       tags: xtra
 
-    - name: Install the extra apt packages
+    - name: xtra | Install the extra apt packages
       apt:
         name: "{{ xtra_apt_packages }}"
         state: present
       tags: xtra
 
-    - name: Install the extra snap packages
+    - name: xtra | Install the extra snap packages
       snap:
         name: "{{ xtra_snap_packages }}"
         classic: yes
         state: present
       tags: xtra, snap
 
-    - name: Install the extra snap packages with classic parameter
+    - name: xtra | Install the extra snap packages with classic parameter
       snap:
         name: "{{ xtra_classic_snap_packages }}"
         classic: yes
         state: present
       tags: xtra, snap-classic
 
-    - name: Upgrade all packages
+    - name: apt-post | Upgrade all packages
       apt:
         upgrade: dist
         update_cache: yes
       tags: apt-post
 
-    - name: Autoclean apt
+    - name: apt-post | Autoclean apt
       apt:
         autoclean: yes
       tags: apt-post
 
-    - name: Autoremove apt
+    - name: apt-post | Autoremove apt
       apt:
         autoremove: yes
       tags: apt-post
 
-    - name: Check if a reboot is needed
+    - name: post | Check if a reboot is needed
       register: reboot_required_file
       stat:
         path: /var/run/reboot-required
       tags: post
 
   post_tasks:
-    - name: Reboot warning if needed
+    - name: post | Reboot warning if needed
       debug:
         msg: "Please reboot your system"
       when: reboot_required_file.stat.exists
