@@ -76,6 +76,7 @@
       - whois
 
     xtra_snap_packages:
+      - beekeeper-studio
       - bpytop
       - mattermost-desktop
       - multipass
