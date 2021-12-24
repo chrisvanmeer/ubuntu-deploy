@@ -74,6 +74,7 @@
       - vlc
       - wget
       - whois
+      - yamllint
 
     xtra_snap_packages:
       - beekeeper-studio
