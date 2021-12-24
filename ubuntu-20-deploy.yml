@@ -32,6 +32,7 @@
 
     xtra_apt_packages:
       - alpine
+      - ansible-lint
       - apticron
       - atop
       - bsdgames
