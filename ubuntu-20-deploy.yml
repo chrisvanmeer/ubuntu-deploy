@@ -26,14 +26,6 @@
         to_port: "{{ security_ssh_port }}"
         protocol: tcp
         comment: "Allow incoming SSH"
-      # - rule: allow
-      #   to_port: "{{ apache_listen_port }}"
-      #   protocol: tcp
-      #   comment: "Allow incoming HTTP"
-      # - rule: allow
-      #   to_port: "{{ apache_listen_port_ssl }}"
-      #   protocol: tcp
-      #   comment: "Allow incoming HTTPS"
 
     ppa_repos:
       - "ppa:agornostal/ulauncher"
