@@ -16,7 +16,7 @@ sudo apt-add-repository ppa:ansible/ansible -y && sudo apt update && sudo apt in
 git clone https://github.com/chrisvanmeer/ubuntu-deploy.git
 ```
 
-## Role variables
+## Variables
 
 I use a lot of roles from Jeff Geerling ([@geerlingguy](https://github.com/geerlingguy)) and pretty much use the default settings. The only real change is that for my systems, I sometimes install Apache to listen on localhost only. If you want to change this, change the following variable in the playbook to:
 
