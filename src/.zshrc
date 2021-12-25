@@ -10,7 +10,7 @@ export CLICOLOR_FORCE=1
 unsetopt nomatch
 
 # Nicer prompt.
-# export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
+export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh_aliases
