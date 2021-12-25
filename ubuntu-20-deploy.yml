@@ -163,11 +163,11 @@
 
     - name: dotfiles | Copy .files to their location
       copy:
-        src: "{{ item.key }}"
-        dest: "{{ item.value }}"
+        src: "{{ item.src }}"
+        dest: "{{ item.dst }}"
         state: present
       loop:
-        - .vimrc: ~/.vimrc
+        - { src: '.vimrc', dst: '~/.vimrc' }
       tags: dotfiles, core
 
     - name: apt-pre | Add needed PPA's
