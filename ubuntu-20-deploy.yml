@@ -117,7 +117,6 @@
       - wget
       - whois
       - yamllint
-      - zsh
     xtra_snap_packages:
       - beekeeper-studio
       - bpytop
@@ -191,7 +190,13 @@
       loop: "{{ bash_aliases }}"
       tags: bash, core
 
-    - name: "chrisvanmeer.zsh : Install oh-my-zsh"
+    - name: "chrisvanmeer.zsh : Ensure zsh is installed."
+      apt:
+        name: zsh
+        state: present
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Install oh-my-zsh."
       git:
         repo: https://github.com/robbyrussell/oh-my-zsh
         dest: ~/.oh-my-zsh
@@ -199,14 +204,14 @@
       become: false
       tags: zsh, core
 
-    - name: "chrisvanmeer.zsh : Check if {{ zsh_aliases_path }} exists"
+    - name: "chrisvanmeer.zsh : Check if {{ zsh_aliases_path }} exists."
       stat:
         path: "{{ zsh_aliases_path }}"
       become: false
       register: zsh_aliases_status
       tags: zsh, core
 
-    - name: "chrisvanmeer.zsh : Create {{ zsh_aliases_path }} file if needed"
+    - name: "chrisvanmeer.zsh : Create {{ zsh_aliases_path }} file if needed."
       file:
         path: "{{ zsh_aliases_path }}"
         state: touch
@@ -214,7 +219,7 @@
       when: not zsh_aliases_status.stat.exists
       tags: zsh, core
 
-    - name: "chrisvanmeer.zsh : Add aliases to {{ zsh_aliases_path }}"
+    - name: "chrisvanmeer.zsh : Add aliases to {{ zsh_aliases_path }}."
       lineinfile:
         dest: "{{ zsh_aliases_path }}"
         line: 'alias {{ item.alias }}="{{ item.command }}"'
@@ -223,7 +228,7 @@
       loop: "{{ zsh_aliases }}"
       tags: zsh, core
 
-    - name: "chrisvanmeer.zsh : Get zsh path"
+    - name: "chrisvanmeer.zsh : Get zsh path."
       command: which zsh
       register: zsh_path
       become: false
@@ -234,7 +239,7 @@
         var: zsh_path
       tags: zsh
 
-    - name: "chrisvanmeer.zsh : Switch shell to zsh"
+    - name: "chrisvanmeer.zsh : Switch shell to zsh."
       user:
         name: "{{ ansible_user_id }}"
         shell: "{{ zsh_path.stdout }}"
