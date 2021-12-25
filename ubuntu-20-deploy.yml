@@ -30,6 +30,10 @@
     ppa_repos:
       - "ppa:agornostal/ulauncher"
 
+    dotfiles:
+      - src: ".vimrc"
+        dst: "~/.vimrc"
+
     xtra_apt_packages:
       - alpine
       - ansible-lint
@@ -165,8 +169,7 @@
       copy:
         src: "{{ item.src }}"
         dest: "{{ item.dst }}"
-      loop:
-        - { src: '.vimrc', dst: '~/.vimrc' }
+      loop: {{ dotfiles }}
       tags: dotfiles, core
 
     - name: apt-pre | Add needed PPA's
