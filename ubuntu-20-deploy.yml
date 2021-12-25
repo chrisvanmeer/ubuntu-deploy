@@ -60,6 +60,21 @@
       - alias: 'mp'
         command: 'multipass'
 
+    zsh_aliases_path: "{{ home_path }}/.zsh_aliases"
+    zsh_aliases:
+      - alias: 'a1'
+        command: 'sudo apt update'
+      - alias: 'a2'
+        command: 'sudo apt upgrade'
+      - alias: 'a3'
+        command: 'sudo apt dist-upgrade'
+      - alias: 'a4'
+        command: 'sudo apt autoremove'
+      - alias: 'a5'
+        command: 'sudo apt clean'
+      - alias: 'mp'
+        command: 'multipass'
+
     # Package variables
     xtra_apt_packages:
       - alpine
@@ -102,6 +117,7 @@
       - wget
       - whois
       - yamllint
+      - zsh
     xtra_snap_packages:
       - beekeeper-studio
       - bpytop
@@ -174,6 +190,50 @@
       become: false
       loop: "{{ bash_aliases }}"
       tags: bash, core
+
+    - name: "chrisvanmeer.zsh : Install oh-my-zsh"
+      git:
+        repo: https://github.com/robbyrussell/oh-my-zsh dest=~/.oh-my-zsh
+        force: yes
+      become: false
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Check if {{ zsh_aliases_path }} exists"
+      stat:
+        path: "{{ zsh_aliases_path }}"
+      register: zsh_aliases_status
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Create {{ zsh_aliases_path }} file if needed"
+      file:
+        path: "{{ zsh_aliases_path }}"
+        state: touch
+      when: not zsh_aliases_status.stat.exists
+
+    - name: "chrisvanmeer.zsh : Add aliases to {{ zsh_aliases_path }}"
+      lineinfile:
+        dest: "{{ zsh_aliases_path }}"
+        line: 'alias {{ item.alias }}="{{ item.command }}"'
+        regexp: "^alias {{ item.alias }}="
+      become: false
+      loop: "{{ zsh_aliases }}"
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Get zsh path"
+      command: which zsh
+      register: zsh_path
+      become: false
+      when: ansible_user_shell != zsh_path.stdout
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Switch shell to zsh"
+      user:
+        name: {{ ansible_user_id }}
+        shell: {{ zsh_path.stdout }}
+      become: false
+      when: ansible_user_shell != zsh_path.stdout
+      tags: zsh, core
+
 
     - name: "chrisvanmeer.dotfiles : Copy dotfiles to their location."
       copy:
