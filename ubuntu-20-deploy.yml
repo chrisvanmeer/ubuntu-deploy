@@ -47,18 +47,18 @@
     # Variables for bash
     bash_rc_path: "{{ home_path }}/.bashrc"
     bash_aliases:
-        - alias: 'a1'
-          command: 'sudo apt update'
-        - alias: 'a2'
-          command: 'sudo apt upgrade'
-        - alias: 'a3'
-          command: 'sudo apt dist-upgrade'
-        - alias: 'a4'
-          command: 'sudo apt autoremove'
-        - alias: 'a5'
-          command: 'sudo apt clean'
-        - alias: 'mp'
-          command: 'multipass'
+      - alias: 'a1'
+        command: 'sudo apt update'
+      - alias: 'a2'
+        command: 'sudo apt upgrade'
+      - alias: 'a3'
+        command: 'sudo apt dist-upgrade'
+      - alias: 'a4'
+        command: 'sudo apt autoremove'
+      - alias: 'a5'
+        command: 'sudo apt clean'
+      - alias: 'mp'
+        command: 'multipass'
 
     # Package variables
     xtra_apt_packages:
