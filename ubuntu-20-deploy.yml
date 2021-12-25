@@ -240,7 +240,6 @@
       user:
         name: "{{ current_user }}"
         shell: "{{ zsh_path.stdout }}"
-      when: ansible_user_shell != zsh_path.stdout
       tags: zsh, core
 
     - name: "chrisvanmeer.dotfiles : Copy dotfiles to their location."
