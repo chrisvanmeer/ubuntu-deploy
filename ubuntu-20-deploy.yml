@@ -200,6 +200,12 @@
       with_items: "{{ bash_aliases }}"
       tags: bash, core
 
+    - name: "chrisvanmeer.bash : Source the {{ bash_rc_path }} file"
+      shell: "source {{ bash_rc_path }}"
+      become: false
+      changed_when: false
+      tags: bash, core
+
     - name: "chrisvanmeer.dotfiles : Copy .files to their location."
       copy:
         src: "{{ src_files }}/{{ item }}"
