@@ -82,6 +82,7 @@
       - lynx
       - mailutils
       - mc
+      - mlocate
       - multitail
       - nano
       - neofetch
