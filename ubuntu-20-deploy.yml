@@ -136,12 +136,12 @@
       when: (ansible_distribution != "Ubuntu") or (ansible_distribution_major_version|int != _ubuntu_major_version|int)
       tags: check
 
-    - name: "chrisvanmeer.docker : Set a fact with the current user name to add it to the docker group later."
+    - name: "chrisvanmeer.fact : Set a fact with the current user name."
       become: false
       set_fact:
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
         current_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
-      tags: zsh, docker, core
+      tags: fact, zsh, docker, core
 
   roles:
     - role: geerlingguy.certbot
