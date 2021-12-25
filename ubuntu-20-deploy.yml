@@ -215,6 +215,7 @@
         path: "{{ zsh_aliases_path }}"
         state: touch
       when: not zsh_aliases_status.stat.exists
+      tags: zsh, core
 
     - name: "chrisvanmeer.zsh : Add aliases to {{ zsh_aliases_path }}"
       lineinfile:
