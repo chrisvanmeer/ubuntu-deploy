@@ -178,7 +178,7 @@
       stat:
         path: ~/.vim/pack/vendor/start/indentLine
       become: false
-      register: identLine
+      register: identline
       tags: vim, core
 
     - name: vim | Clone indentLine repo if identLine is not installed
@@ -186,13 +186,13 @@
         repo: https://github.com/Yggdroot/indentLine.git
         dest: ~/.vim/pack/vendor/start/indentLine
       become: false
-      when: identLine is not defined
+      when: not identline.stat.exists
       tags: vim, core
 
     - name: vim | Register identLine plugin if identLine is not installed
       command: "vim -u NONE -c \"helptags  ~/.vim/pack/vendor/start/indentLine/doc\" -c \"q\""
       become: false
-      when: identLine is not defined
+      when: not identline.stat.exists
       tags: vim, core
 
     - name: apt-pre | Add needed PPA's
