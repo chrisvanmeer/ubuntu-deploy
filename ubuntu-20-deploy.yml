@@ -40,27 +40,12 @@
     home_path: "~"
     src_files: "src"
     dotfiles_files:
+      - .bash_aliases
       - .hushlogin
       - .tmux.conf
       - .vimrc
       - .zsh_aliases
       - .zshrc
-
-    # Variables for bash
-    bash_rc_path: "{{ home_path }}/.bashrc"
-    bash_aliases:
-      - alias: 'a1'
-        command: 'sudo apt update'
-      - alias: 'a2'
-        command: 'sudo apt upgrade'
-      - alias: 'a3'
-        command: 'sudo apt dist-upgrade'
-      - alias: 'a4'
-        command: 'sudo apt autoremove'
-      - alias: 'a5'
-        command: 'sudo apt clean'
-      - alias: 'mp'
-        command: 'multipass'
 
     # Package variables
     xtra_apt_packages:
@@ -177,15 +162,6 @@
       become: false
       loop: "{{ dotfiles_files }}"
       tags: dotfiles, core
-
-    - name: "chrisvanmeer.bash : Add bash aliases to {{ bash_rc_path }} - in case of switching back to bash."
-      lineinfile:
-        dest: "{{ bash_rc_path }}"
-        line: 'alias {{ item.alias }}="{{ item.command }}"'
-        regexp: "^alias {{ item.alias }}="
-      become: false
-      loop: "{{ bash_aliases }}"
-      tags: bash, core
 
     - name: "chrisvanmeer.zsh : Ensure zsh is installed."
       apt:

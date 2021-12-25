@@ -1,0 +1,6 @@
+alias a1="sudo apt update"
+alias a2="sudo apt upgrade"
+alias a3="sudo apt dist-upgrade"
+alias a4="sudo apt autoremove"
+alias a5="sudo apt clean"
+alias mp="multipass"
