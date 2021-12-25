@@ -202,18 +202,15 @@
     - name: "chrisvanmeer.zsh : Check if {{ zsh_aliases_path }} exists"
       stat:
         path: "{{ zsh_aliases_path }}"
+      become: false
       register: zsh_aliases_status
       tags: zsh, core
-
-    - name: debug
-      debug:
-        var: zsh_aliases_status
-      tags: zsh
 
     - name: "chrisvanmeer.zsh : Create {{ zsh_aliases_path }} file if needed"
       file:
         path: "{{ zsh_aliases_path }}"
         state: touch
+      become: false
       when: not zsh_aliases_status.stat.exists
       tags: zsh, core
 
@@ -240,7 +237,6 @@
       become: false
       when: ansible_user_shell != zsh_path.stdout
       tags: zsh, core
-
 
     - name: "chrisvanmeer.dotfiles : Copy dotfiles to their location."
       copy:
