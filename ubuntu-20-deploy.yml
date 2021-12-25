@@ -169,7 +169,7 @@
       copy:
         src: "{{ item.src }}"
         dest: "{{ item.dst }}"
-      loop: {{ dotfiles }}
+      loop: "{{ dotfiles }}"
       tags: dotfiles, core
 
     - name: apt-pre | Add needed PPA's
