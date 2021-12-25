@@ -166,6 +166,7 @@
       tags: hush, core
 
     - name: dotfiles | Copy .files to their location
+      become: false
       copy:
         src: "{{ item.src }}"
         dest: "{{ item.dst }}"
