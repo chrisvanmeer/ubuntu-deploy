@@ -55,7 +55,7 @@ In the `xtra_apt_packages` variable, I keep a list of the packages I use frequen
 
 ```
 cd ubuntu-deploy
-ansible-galaxy install -i -r requirements.yml
+ansible-galaxy install -r requirements.yml
 ```
 
 ## Run the playbook
