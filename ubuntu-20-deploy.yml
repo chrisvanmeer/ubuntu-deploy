@@ -205,6 +205,8 @@
       shell: "source {{ bash_rc_path }}"
       become: false
       changed_when: false
+      args:
+        executable: /bin/bash
       tags: bash, core
 
     - name: "chrisvanmeer.dotfiles : Copy .files to their location."
