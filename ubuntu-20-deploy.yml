@@ -30,9 +30,10 @@
     ppa_repos:
       - "ppa:agornostal/ulauncher"
 
-    dotfiles:
-      - src: ".vimrc"
-        dst: "~/.vimrc"
+    dotfiles_files:
+      - .vimrc
+
+    dotfiles_home: "~"
 
     xtra_apt_packages:
       - alpine
@@ -167,10 +168,10 @@
 
     - name: dotfiles | Copy .files to their location
       copy:
-        src: "{{ item.src }}"
-        dest: "{{ item.dst }}"
+        src: "{{ item }}"
+        dest: "{{ dotfiles_home }}/{{ item.dst }}"
       become: false
-      loop: "{{ dotfiles }}"
+      loop: "{{ dotfiles_files }}"
       tags: dotfiles, core
 
     - name: vim | Check if indentLine plugin is installed
