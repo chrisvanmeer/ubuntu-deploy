@@ -165,7 +165,6 @@
       copy:
         src: "{{ item.src }}"
         dest: "{{ item.dst }}"
-        state: present
       loop:
         - { src: '.vimrc', dst: '~/.vimrc' }
       tags: dotfiles, core
