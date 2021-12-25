@@ -197,7 +197,7 @@
         line: 'alias {{ item.alias }}="{{ item.command }}"'
         regexp: "^alias {{ item.alias }}="
       become: false
-      with_items: "{{ bash_aliases }}"
+      loop: "{{ bash_aliases }}"
       tags: bash, core
 
     - name: "chrisvanmeer.bash : Source the {{ bash_rc_path }} file"
