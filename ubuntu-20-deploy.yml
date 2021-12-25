@@ -178,7 +178,7 @@
       loop: "{{ dotfiles_files }}"
       tags: dotfiles, core
 
-    - name: "chrisvanmeer.bash : Add bash aliases to {{ bash_rc_path }}."
+    - name: "chrisvanmeer.bash : Add bash aliases to {{ bash_rc_path }} - in case of switching back to bash."
       lineinfile:
         dest: "{{ bash_rc_path }}"
         line: 'alias {{ item.alias }}="{{ item.command }}"'
@@ -208,7 +208,7 @@
       changed_when: false
       tags: zsh, core
 
-    - name: "chrisvanmeer.zsh : Switch shell to zsh."
+    - name: "chrisvanmeer.zsh : Switch shell of current user to zsh."
       user:
         name: "{{ current_user }}"
         shell: "{{ zsh_path.stdout }}"
