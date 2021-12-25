@@ -1,15 +1,19 @@
 ---
-- hosts: localhost
+- name: "Ubuntu 20.04 LTS Deployment"
+  hosts: localhost
   connection: local
   become: true
 
   vars:
+    # Major Ubuntu version to check against
     _ubuntu_major_version: 20
 
+    # Apache variables
     apache_listen_ip: "127.0.0.1"
     apache_listen_port: 80
     apache_listen_port_ssl: 443
 
+    # PHP variables
     php_version: "8.1"
     php_packages:
       - "php{{ php_version }}"
@@ -17,24 +21,28 @@
       - "libapache2-mod-php{{ php_version }}"
     php_enable_apc: false
 
+    # NTP variables
     ntp_timezone: "Europe/Amsterdam"
 
+    # Security variables
     security_ssh_port: 22
-
     ufw_rules:
       - rule: allow
         to_port: "{{ security_ssh_port }}"
         protocol: tcp
         comment: "Allow incoming SSH"
 
+    # External PPA's
     ppa_repos:
       - "ppa:agornostal/ulauncher"
 
+    # Variables for copy jobs
+    src_files: "src"
+    dotfiles_home: "~"
     dotfiles_files:
       - .vimrc
 
-    dotfiles_home: "~"
-
+    # Package variables
     xtra_apt_packages:
       - alpine
       - ansible-lint
@@ -73,7 +81,6 @@
       - wget
       - whois
       - yamllint
-
     xtra_snap_packages:
       - beekeeper-studio
       - bpytop
@@ -82,25 +89,24 @@
       - remmina
       - simplenote
       - telegram-desktop
-
     xtra_classic_snap_packages:
       - code
       - sublime-text
 
   pre_tasks:
-    - name: check | Fail when Linux distribution does not match
+    - name: "chrisvanmeer.check : Fail when Linux distribution does not match."
       fail:
-        msg: "Failed, this is not Ubuntu 20...but {{ ansible_distribution }} {{ ansible_distribution_major_version }}"
+        msg: "Failed, this is not Ubuntu 20...but {{ ansible_distribution }} {{ ansible_distribution_major_version }}."
       when: (ansible_distribution != "Ubuntu") and (ansible_distribution_major_version|int != _ubuntu_major_version|int)
       tags: check
 
-    - name: docker | Set a fact with the current user name to add it to the docker group later
+    - name: "chrisvanmeer.docker : Set a fact with the current user name to add it to the docker group later."
       become: false
       set_fact:
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
       tags: docker, core
 
-    - name: ssh | Ensure openssh-server is installed
+    - name: "chrisvanmeer.ssh : Ensure openssh-server is installed."
       apt:
         name:
           - openssh-server
@@ -108,7 +114,7 @@
         state: present
       tags: ssh
 
-    - name: ssh | Ensure openssh-server is started and enabled
+    - name: "chrisvanmeer.ssh : Ensure openssh-server is started and enabled."
       service:
         name: ssh
         state: started
@@ -139,26 +145,29 @@
 
   tasks:
 
-    - name: php-post | Remove standard index.html
+    - name: "chrisvanmeer.php-post : Remove standard index.html."
       file:
         path: /var/www/html/index.html
         state: absent
       tags: php-post, core
 
-    - name: php-post | Create Hello World PHP page
+    - name: "chrisvanmeer.php-post : Create Hello World PHP page."
       copy:
         dest: /var/www/html/index.php
-        content: "<?php echo 'Hello World!'; ?>"
+        content: |
+          <?php
+            echo 'Hello World!';
+          ?>
       tags: php-post, core
 
-    - name: hush | Check if .hushlogin exists
+    - name: "chrisvanmeer.hush : Check if .hushlogin exists."
       stat:
         path: ~/.hushlogin
       become: false
       register: hush
       tags: hush, core
 
-    - name: hush | Create a .hushlogin file if it not exists
+    - name: "chrisvanmeer.hush : Create a .hushlogin file if it not exists."
       file:
         path: ~/.hushlogin
         state: touch
@@ -166,44 +175,44 @@
       when: not hush.stat.exists
       tags: hush, core
 
-    - name: dotfiles | Copy .files to their location
+    - name: "chrisvanmeer.dotfiles : Copy .files to their location."
       copy:
-        src: "{{ item }}"
+        src: "{{ src_files }}/{{ item }}"
         dest: "{{ dotfiles_home }}/{{ item }}"
       become: false
       loop: "{{ dotfiles_files }}"
       tags: dotfiles, core
 
-    - name: vim | Check if vim cobalt theme is present
+    - name: "chrisvanmeer.vim : Check if vim cobalt theme is present."
       stat:
         path: ~/.vim/colors/cobalt.vim
       become: false
       register: vimcolors
       tags: vim, vimcolors, core
 
-    - name: vim | Ensure vim colors directory is present
+    - name: "chrisvanmeer.vim : Ensure vim colors directory is present."
       file:
         path: ~/.vim/colors
         state: directory
       become: false
       tags: vim, vimcolors, core
 
-    - name: vim | Install cobalt theme if not present
+    - name: "chrisvanmeer.vim : Install cobalt theme if not present."
       copy:
-        src: .vim/colors/cobalt.vim
+        src: "{{ src_files }}/.vim/colors/cobalt.vim"
         dest: ~/.vim/colors/cobalt.vim
       become: false
       when: not vimcolors.stat.exists
       tags: vim, vimcolors, core
 
-    - name: vim | Check if indentLine plugin is installed
+    - name: "chrisvanmeer.vim : Check if indentLine plugin is installed."
       stat:
         path: ~/.vim/pack/vendor/start/indentLine
       become: false
       register: identline
       tags: vim, core
 
-    - name: vim | Clone indentLine repo if identLine is not installed
+    - name: "chrisvanmeer.vim : Clone indentLine repo if identLine is not installed."
       git:
         repo: https://github.com/Yggdroot/indentLine.git
         dest: ~/.vim/pack/vendor/start/indentLine
@@ -211,82 +220,82 @@
       when: not identline.stat.exists
       tags: vim, core
 
-    - name: vim | Register identLine plugin if identLine is not installed
+    - name: "chrisvanmeer.vim : Register identLine plugin if identLine is not installed."
       command: "vim -u NONE -c \"helptags  ~/.vim/pack/vendor/start/indentLine/doc\" -c \"q\""
       become: false
       when: not identline.stat.exists
       tags: vim, core
 
-    - name: apt-pre | Add needed PPA's
+    - name: "chrisvanmeer.apt-pre : Add needed PPA's."
       apt_repository:
         repo: "{{ item }}"
         state: present
       loop: "{{ ppa_repos }}"
       tags: apt-pre
 
-    - name: "apt-pre | ensure Google linux signing key present"
+    - name: "chrisvanmeer.apt-pre : Ensure that Google signing key is present."
       apt_key:
         url: https://dl-ssl.google.com/linux/linux_signing_key.pub
         state: present
       tags: apt-pre
 
-    - name: apt-pre | Add specified repository for Google Chrome
+    - name: "chrisvanmeer.apt-pre : Add specified repository for Google Chrome."
       apt_repository:
         repo: deb http://dl.google.com/linux/chrome/deb/ stable main
         state: present
         filename: google-chrome
       tags: apt-pre
 
-    - name: xtra | Update apt cache
+    - name: "chrisvanmeer.xtra : Update apt cache."
       apt:
         update_cache: yes
         cache_valid_time: 3600
       tags: xtra
 
-    - name: xtra | Install the extra apt packages
+    - name: "chrisvanmeer.xtra : Install the extra apt packages."
       apt:
         name: "{{ xtra_apt_packages }}"
         state: present
       tags: xtra
 
-    - name: xtra | Install the extra snap packages
+    - name: "chrisvanmeer.xtra : Install the extra snap packages."
       snap:
         name: "{{ xtra_snap_packages }}"
         classic: yes
         state: present
       tags: xtra, snap
 
-    - name: xtra | Install the extra snap packages with classic parameter
+    - name: "chrisvanmeer.xtra : Install the extra snap packages with classic parameter."
       snap:
         name: "{{ xtra_classic_snap_packages }}"
         classic: yes
         state: present
       tags: xtra, snap-classic
 
-    - name: apt-post | Upgrade all packages
+    - name: "chrisvanmeer.apt-post : Upgrade all apt packages."
       apt:
         upgrade: dist
         update_cache: yes
       tags: apt-post
 
-    - name: apt-post | Autoclean apt
-      apt:
-        autoclean: yes
-      tags: apt-post
-
-    - name: apt-post | Autoremove apt
+    - name: "chrisvanmeer.apt-post : Autoremove unused apt packages."
       apt:
         autoremove: yes
       tags: apt-post
 
-    - name: post | Check if a reboot is needed
+    - name: "chrisvanmeer.apt-post : Autoclean apt."
+      apt:
+        autoclean: yes
+      tags: apt-post
+
+    - name: "chrisvanmeer.post : Check if a reboot is needed."
       register: reboot_required_file
       stat:
         path: /var/run/reboot-required
       tags: post
 
   post_tasks:
-    - name: post | Reboot warning if needed
+    - name: "chrisvanmeer.post : Reboot warning if needed."
       debug:
         msg: "Please reboot your system"
       when: reboot_required_file.stat.exists
