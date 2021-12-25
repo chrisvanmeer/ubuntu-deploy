@@ -96,6 +96,8 @@
       - tmux
       - ulauncher
       - vim
+      - virtualbox
+      - virtualbox-ext-pack
       - vlc
       - wget
       - whois
