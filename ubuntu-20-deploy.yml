@@ -42,6 +42,22 @@
     dotfiles_files:
       - .vimrc
 
+    # Variables for bash
+    bash_rc_path: "~/.bashrc"
+    bash_aliases:
+        - alias: 'mp'
+          command: 'multipass'
+        - alias: 'a1'
+          command: 'sudo apt update'
+        - alias: 'a2'
+          command: 'sudo apt upgrade'
+        - alias: 'a3'
+          command: 'sudo apt dist-upgrade'
+        - alias: 'a4'
+          command: 'sudo apt autoremove'
+        - alias: 'a5'
+          command: 'sudo apt clean'
+
     # Package variables
     xtra_apt_packages:
       - alpine
@@ -174,6 +190,14 @@
       become: false
       when: not hush.stat.exists
       tags: hush, core
+
+    - name: "chrisvanmeer.bash : Add bash aliases to {{ bash_rc_path }}"
+      lineinfile:
+        dest: "{{ bash_rc_path }}"
+        line: 'alias {{ item.alias }}="{{ item.command }}"'
+        regexp: "^alias {{ item.alias }}="
+      with_items: "{{ bash_aliases }}"
+      tags: bash, core
 
     - name: "chrisvanmeer.dotfiles : Copy .files to their location."
       copy:
