@@ -196,6 +196,7 @@
         dest: "{{ bash_rc_path }}"
         line: 'alias {{ item.alias }}="{{ item.command }}"'
         regexp: "^alias {{ item.alias }}="
+      become: false
       with_items: "{{ bash_aliases }}"
       tags: bash, core
 
