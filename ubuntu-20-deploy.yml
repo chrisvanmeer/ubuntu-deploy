@@ -125,21 +125,6 @@
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
       tags: docker, core
 
-    - name: "chrisvanmeer.ssh : Ensure openssh-server is installed."
-      apt:
-        name:
-          - openssh-server
-          - openssh-client
-        state: present
-      tags: ssh
-
-    - name: "chrisvanmeer.ssh : Ensure openssh-server is started and enabled."
-      service:
-        name: ssh
-        state: started
-        enabled: yes
-      tags: ssh
-
   roles:
     - role: geerlingguy.certbot
       tags: certbot, core
@@ -164,20 +149,20 @@
 
   tasks:
 
-    - name: "chrisvanmeer.php-post : Remove standard index.html."
-      file:
-        path: /var/www/html/index.html
-        state: absent
-      tags: php-post, core
+    - name: "chrisvanmeer.openssh : Ensure openssh-server is installed."
+      apt:
+        name:
+          - openssh-server
+          - openssh-client
+        state: present
+      tags: openssh
 
-    - name: "chrisvanmeer.php-post : Create Hello World PHP page."
-      copy:
-        dest: /var/www/html/index.php
-        content: |
-          <?php
-            echo 'Hello World!';
-          ?>
-      tags: php-post, core
+    - name: "chrisvanmeer.openssh : Ensure openssh-server is started and enabled."
+      service:
+        name: ssh
+        state: started
+        enabled: yes
+      tags: openssh
 
     - name: "chrisvanmeer.bash : Add bash aliases to {{ bash_rc_path }}."
       lineinfile:
@@ -238,6 +223,21 @@
       become: false
       when: not identline.stat.exists
       tags: vim, core
+
+    - name: "chrisvanmeer.php-post : Remove standard index.html."
+      file:
+        path: /var/www/html/index.html
+        state: absent
+      tags: php-post, core
+
+    - name: "chrisvanmeer.php-post : Create Hello World PHP page."
+      copy:
+        dest: /var/www/html/index.php
+        content: |
+          <?php
+            echo 'Hello World!';
+          ?>
+      tags: php-post, core
 
     - name: "chrisvanmeer.apt-pre : Add needed PPA's."
       apt_repository:
