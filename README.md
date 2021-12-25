@@ -1,6 +1,7 @@
 # ubuntu-deploy
 
-Install for my personal Ubuntu systems
+Install for my personal Ubuntu systems.  
+Make sure you have at least 10Gb of free diskspace.
 
 ## Install Ansible PPA and install Ansible
 
@@ -16,7 +17,7 @@ sudo apt-add-repository ppa:ansible/ansible -y && sudo apt update && sudo apt in
 git clone https://github.com/chrisvanmeer/ubuntu-deploy.git
 ```
 
-## Role variables
+## Variables
 
 I use a lot of roles from Jeff Geerling ([@geerlingguy](https://github.com/geerlingguy)) and pretty much use the default settings. The only real change is that for my systems, I sometimes install Apache to listen on localhost only. If you want to change this, change the following variable in the playbook to:
 
@@ -67,4 +68,4 @@ ansible-playbook ubuntu-20-deploy.yml
 
 ## :coffee: Coffee break
 
-Running this setup usually takes a maximum of 10 minutes. Perfect time for a coffee break.
+Running this playbook usually takes about 20-30 minutes. Perfect time for a coffee break.
