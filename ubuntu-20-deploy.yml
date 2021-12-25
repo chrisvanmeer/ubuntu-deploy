@@ -43,6 +43,8 @@
       - .hushlogin
       - .tmux.conf
       - .vimrc
+      - .zsh_aliases
+      - .zshrc
 
     # Variables for bash
     bash_rc_path: "{{ home_path }}/.bashrc"
