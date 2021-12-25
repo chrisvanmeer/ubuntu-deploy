@@ -141,7 +141,7 @@
       set_fact:
         docker_users: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
         current_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
-      tags: docker, core
+      tags: zsh, docker, core
 
   roles:
     - role: geerlingguy.certbot
