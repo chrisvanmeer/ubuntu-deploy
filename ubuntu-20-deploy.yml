@@ -259,7 +259,7 @@
         filename: google-chrome
       tags: chrome
 
-    - name: "chrisvanmeer.chrome : Remove conflicting line in repo."
+    - name: "chrisvanmeer.chrome : Esnure only the right architecture in the repo is enabled."
       lineinfile:
         dest: /etc/apt/sources.list.d/google-chrome.list
         line: '#deb http://dl.google.com/linux/chrome/deb/ stable main'
