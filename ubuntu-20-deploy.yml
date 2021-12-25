@@ -40,6 +40,7 @@
     src_files: "src"
     dotfiles_home: "~"
     dotfiles_files:
+      - .hushlogin
       - .vimrc
 
     # Variables for bash
@@ -177,21 +178,6 @@
           ?>
       tags: php-post, core
 
-    - name: "chrisvanmeer.hush : Check if .hushlogin exists."
-      stat:
-        path: ~/.hushlogin
-      become: false
-      register: hush
-      tags: hush, core
-
-    - name: "chrisvanmeer.hush : Create a .hushlogin file if it not exists."
-      file:
-        path: ~/.hushlogin
-        state: touch
-      become: false
-      when: not hush.stat.exists
-      tags: hush, core
-
     - name: "chrisvanmeer.bash : Add bash aliases to {{ bash_rc_path }}"
       lineinfile:
         dest: "{{ bash_rc_path }}"
@@ -201,15 +187,7 @@
       loop: "{{ bash_aliases }}"
       tags: bash, core
 
-    - name: "chrisvanmeer.bash : Source the {{ bash_rc_path }} file"
-      shell: "source {{ bash_rc_path }}"
-      become: false
-      changed_when: false
-      args:
-        executable: /bin/bash
-      tags: bash, core
-
-    - name: "chrisvanmeer.dotfiles : Copy .files to their location."
+    - name: "chrisvanmeer.dotfiles : Copy dotfiles to their location."
       copy:
         src: "{{ src_files }}/{{ item }}"
         dest: "{{ dotfiles_home }}/{{ item }}"
