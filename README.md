@@ -1,7 +1,7 @@
 # ubuntu-deploy
 
 Install for my personal Ubuntu systems.  
-Make sure you have at least 10Gb of free space.
+Make sure you have at least 10Gb of free diskspace.
 
 ## Install Ansible PPA and install Ansible
 
