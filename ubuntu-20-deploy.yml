@@ -169,7 +169,7 @@
     - name: dotfiles | Copy .files to their location
       copy:
         src: "{{ item }}"
-        dest: "{{ dotfiles_home }}/{{ item.dst }}"
+        dest: "{{ dotfiles_home }}/{{ item }}"
       become: false
       loop: "{{ dotfiles_files }}"
       tags: dotfiles, core
