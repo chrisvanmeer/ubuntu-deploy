@@ -234,16 +234,10 @@
       become: false
       tags: zsh, core
 
-    - name: debug zsh
-      debug:
-        var: zsh_path
-      tags: zsh
-
     - name: "chrisvanmeer.zsh : Switch shell to zsh."
       user:
         name: "{{ ansible_user_id }}"
         shell: "{{ zsh_path.stdout }}"
-      become: false
       when: ansible_user_shell != zsh_path.stdout
       tags: zsh, core
 
