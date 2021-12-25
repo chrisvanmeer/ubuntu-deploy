@@ -193,6 +193,7 @@
         src: .vim/colors/cobalt.vim
         dest: ~/.vim/colors/cobalt.vim
       become: false
+      when: not vimcolors.stat.exists
       tags: vim, vimcolors, core
 
     - name: vim | Check if indentLine plugin is installed
