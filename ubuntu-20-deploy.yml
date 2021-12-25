@@ -262,8 +262,8 @@
     - name: "chrisvanmeer.chrome : Remove conflicting line in repo."
       lineinfile:
         dest: /etc/apt/sources.list.d/google-chrome.list
-        line: '#deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main'
-        regexp: '^deb \[arch=amd64\]'
+        line: '#deb http://dl.google.com/linux/chrome/deb/ stable main'
+        regexp: '^deb http'
       tags: chrome
 
     - name: "chrisvanmeer.xtra : Update apt cache."
