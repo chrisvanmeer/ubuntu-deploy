@@ -19,3 +19,8 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh_aliases
 
 plugins=(git brew history kubectl history-substring-search)
+
+# Completions.
+autoload -Uz compinit && compinit
+# Case insensitive.
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
