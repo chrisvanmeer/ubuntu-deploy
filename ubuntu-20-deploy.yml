@@ -246,18 +246,25 @@
       loop: "{{ ppa_repos }}"
       tags: apt-pre
 
-    - name: "chrisvanmeer.apt-pre : Ensure that Google signing key is present."
+    - name: "chrisvanmeer.chrome: Ensure that Google signing key is present."
       apt_key:
         url: https://dl-ssl.google.com/linux/linux_signing_key.pub
         state: present
-      tags: apt-pre
+      tags: chrome
 
-    - name: "chrisvanmeer.apt-pre : Add specified repository for Google Chrome."
+    - name: "chrisvanmeer.chrome : Add specified repository for Google Chrome."
       apt_repository:
         repo: deb http://dl.google.com/linux/chrome/deb/ stable main
         state: present
         filename: google-chrome
-      tags: apt-pre
+      tags: chrome
+
+    - name: "chrisvanmeer.chrome : Remove conflicting line in repo."
+      lineinfile:
+        dest: /etc/apt/sources.list.d/google-chrome.list
+        line: '#deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main'
+        regexp: '^deb \[arch=amd64\]'
+      tags: chrome
 
     - name: "chrisvanmeer.xtra : Update apt cache."
       apt:
