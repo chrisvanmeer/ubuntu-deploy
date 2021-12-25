@@ -205,6 +205,11 @@
       register: zsh_aliases_status
       tags: zsh, core
 
+    - name: debug
+      debug:
+        var: zsh_aliases_status
+      tags: zsh
+
     - name: "chrisvanmeer.zsh : Create {{ zsh_aliases_path }} file if needed"
       file:
         path: "{{ zsh_aliases_path }}"
