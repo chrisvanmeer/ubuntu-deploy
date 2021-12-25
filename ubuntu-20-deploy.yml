@@ -178,6 +178,7 @@
         path: ~/.vim/pack/vendor/start/indentLine
       become: false
       register: identLine
+      tags: vim, core
 
     - name: vim | Clone indentLine repo if identLine is not installed
       git:
