@@ -166,12 +166,32 @@
       tags: hush, core
 
     - name: dotfiles | Copy .files to their location
-      become: false
       copy:
         src: "{{ item.src }}"
         dest: "{{ item.dst }}"
+      become: false
       loop: "{{ dotfiles }}"
       tags: dotfiles, core
+
+    - name: vim | Check if indentLine plugin is installed
+      stat:
+        path: ~/.vim/pack/vendor/start/indentLine
+      become: false
+      register: identLine
+
+    - name: vim | Clone indentLine repo if identLine is not installed
+      git:
+        repo: https://github.com/Yggdroot/indentLine.git
+        dest: ~/.vim/pack/vendor/start/indentLine
+      become: false
+      when: identLine is not defined
+      tags: vim, core
+
+    - name: vim | Register identLine plugin if identLine is not installed
+      command: "vim -u NONE -c \"helptags  ~/.vim/pack/vendor/start/indentLine/doc\" -c \"q\""
+      become: false
+      when: identLine is not defined
+      tags: vim, core
 
     - name: apt-pre | Add needed PPA's
       apt_repository:
