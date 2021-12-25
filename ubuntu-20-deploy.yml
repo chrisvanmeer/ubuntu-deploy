@@ -167,6 +167,15 @@
       when: not hush.stat.exists
       tags: hush, core
 
+    - name: dotfiles | Copy .files to their location
+      copy:
+        src: "{{ item.key }}"
+        dest: "{{ item.value }}"
+        state: present
+      loop:
+        - .vimrc: ~/.vimrc
+      tags: dotfiles, core
+
     - name: apt-pre | Add needed PPA's
       apt_repository:
         repo: "{{ item }}"
