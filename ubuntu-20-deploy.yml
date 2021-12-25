@@ -96,6 +96,7 @@
       - telnet
       - tilix
       - tmux
+      - tree
       - ulauncher
       - vim
       - virtualbox
