@@ -1,6 +1,7 @@
 # ubuntu-deploy
 
-Install for my personal Ubuntu systems
+Install for my personal Ubuntu systems.  
+Make sure you have at least 10Gb of free space.
 
 ## Install Ansible PPA and install Ansible
 
@@ -67,4 +68,4 @@ ansible-playbook ubuntu-20-deploy.yml
 
 ## :coffee: Coffee break
 
-Running this setup usually takes a maximum of 10 minutes. Perfect time for a coffee break.
+Running this setup usually takes about 20-30 minutes. Perfect time for a coffee break.
