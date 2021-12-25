@@ -232,6 +232,7 @@
       command: which zsh
       register: zsh_path
       become: false
+      changed_when: false
       tags: zsh, core
 
     - name: "chrisvanmeer.zsh : Switch shell to zsh."
