@@ -263,11 +263,11 @@
         state: present
       tags: hashicorp, nomad
 
-    # - name: "chrisvanmeer.hashicorp: Ensure that Hashicorp repository is present."
-    #   apt_repository:
-    #     repo: ""
-    #     state: present
-    #   tags: hashicorp, nomad
+    - name: "chrisvanmeer.hashicorp: Ensure that Hashicorp repository is present."
+      apt_repository:
+        repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+        state: present
+      tags: hashicorp, nomad
 
     - name: "chrisvanmeer.chrome: Ensure that Google signing key is present."
       apt_key:
