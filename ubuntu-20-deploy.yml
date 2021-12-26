@@ -56,6 +56,7 @@
       - bsdgames
       - build-essential
       - certbot
+      - consul
       - curl
       - ddgr
       - flameshot
@@ -80,10 +81,12 @@
       - nomad
       - screen
       - telnet
+      - terraform
       - tilix
       - tmux
       - tree
       - ulauncher
+      - vault
       - vim
       - virtualbox
       - virtualbox-ext-pack
