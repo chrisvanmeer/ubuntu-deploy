@@ -15,6 +15,8 @@ export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 
+export VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
+
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh_aliases
 
