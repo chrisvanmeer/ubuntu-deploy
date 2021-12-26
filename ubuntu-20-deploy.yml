@@ -118,25 +118,27 @@
 
   roles:
     - role: geerlingguy.certbot
-      tags: certbot, core
+      tags: certbot, core, roles
     - role: geerlingguy.apache
-      tags: apache, core
+      tags: apache, core, roles
     - role: geerlingguy.php-versions
-      tags: php, core
+      tags: php, core, roles
     - role: geerlingguy.php-mysql
-      tags: php, core
+      tags: php, core, roles
     - role: geerlingguy.mysql
-      tags: mysql, core
+      tags: mysql, core, roles
     - role: geerlingguy.docker
-      tags: docker, core
+      tags: docker, core, roles
     - role: geerlingguy.postfix
-      tags: postfix, core
+      tags: postfix, core, roles
     - role: geerlingguy.security
-      tags: security, core
+      tags: security, core, roles
     - role: geerlingguy.ntp
-      tags: ntp, core
+      tags: ntp, core, roles
     - role: oefenweb.ufw
-      tags: ufw, core
+      tags: ufw, core, roles
+    - role: diodonfrost.vagrant
+      tags: vagrant, core, roles
 
   tasks:
 

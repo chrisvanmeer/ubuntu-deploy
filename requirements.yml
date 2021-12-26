@@ -11,3 +11,4 @@ roles:
   - name: geerlingguy.postfix
   - name: geerlingguy.security
   - name: oefenweb.ufw
+  - name: diodonfrost.vagrant
