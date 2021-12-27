@@ -17,6 +17,12 @@ export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 
 export VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
 
+# Include alias file (if present) containing aliases for ssh, etc.
+if [ -f ~/.aliases ]
+then
+  source ~/.aliases
+fi
+
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh_aliases
 
