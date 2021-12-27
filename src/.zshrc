@@ -1,3 +1,8 @@
+# Colors.
+unset LSCOLORS
+export CLICOLOR=1
+export CLICOLOR_FORCE=1
+
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="pygmalion"
 
