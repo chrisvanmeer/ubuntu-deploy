@@ -41,6 +41,7 @@
     src_files: "src"
     dotfiles_files:
       - .bash_aliases
+      - .gitignore
       - .hushlogin
       - .tmux.conf
       - .vimrc
