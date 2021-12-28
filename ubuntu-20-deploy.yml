@@ -176,10 +176,18 @@
         state: present
       tags: zsh, core
 
-    - name: "chrisvanmeer.zsh : Install oh-my-zsh."
+    - name: "chrisvanmeer.zsh : Ensure oh-my-zsh is installed."
       git:
         repo: https://github.com/robbyrussell/oh-my-zsh
         dest: ~/.oh-my-zsh
+        force: yes
+      become: false
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Ensure zsh-history-substring-search plugin is installed."
+      git:
+        repo: https://github.com/zsh-users/zsh-history-substring-search
+        dest: ~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
         force: yes
       become: false
       tags: zsh, core
