@@ -12,6 +12,8 @@ export CLICOLOR_FORCE=1
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="tjkirch_mod"
 
+source $ZSH/oh-my-zsh.sh
+
 # Don't require escaping globbing characters in zsh.
 unsetopt nomatch
 
@@ -31,7 +33,7 @@ fi
 arch_name="$(uname -m)"
 kernel_name="$(uname -s)"
 if [ "${kernel_name}" = "Linux" ]; then
-    share_path="~/.oh-my-zsh/custom/plugins"
+    share_path="${ZSH_CUSTOM}/plugins"
 elif [ "${arch_name}" = "x86_64" ]; then
     share_path="/usr/local/share"
 elif [ "${arch_name}" = "arm64" ]; then
@@ -66,5 +68,3 @@ rmknownh() {
     sed -i '' "$1d" ~/.ssh/known_hosts
   fi
 }
-
-source $ZSH/oh-my-zsh.sh
