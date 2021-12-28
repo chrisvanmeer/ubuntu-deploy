@@ -68,3 +68,15 @@ rmknownh() {
     sed -i '' "$1d" ~/.ssh/known_hosts
   fi
 }
+
+# Stop a multipass instance, delete it and then purge the inventory
+mpdelete() {
+  re='^[0-9]+$'
+  if [[ -z $1 ]] ; then
+    echo "Error: No container name specified" >&2;
+  else
+    multipass stop $1
+    multipass delete $1
+    multipass purge
+  fi
+}
