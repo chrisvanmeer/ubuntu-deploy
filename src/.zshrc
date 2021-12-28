@@ -29,6 +29,12 @@ then
   source ~/.aliases
 fi
 
+if [ -f ~/.zsh_aliases ]
+then
+  source ~/.zsh_aliases
+fi
+
+
 # Set architecture-specific brew share path.
 arch_name="$(uname -m)"
 kernel_name="$(uname -s)"
@@ -46,13 +52,6 @@ fi
 source ${share_path}/zsh-history-substring-search/zsh-history-substring-search.zsh
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
-
-# Git aliases.
-alias gs='git status'
-alias gc='git commit'
-alias gp='git pull --rebase'
-alias gcam='git commit -am'
-alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
 # Completions.
 autoload -Uz compinit && compinit
