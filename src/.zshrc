@@ -29,6 +29,9 @@ fi
 
 # Set architecture-specific brew share path.
 arch_name="$(uname -m)"
+kernel_name="$(uname -s)"
+if [ "${kernel_name}" = "Linux" ]; then
+    share_path="~"
 if [ "${arch_name}" = "x86_64" ]; then
     share_path="/usr/local/share"
 elif [ "${arch_name}" = "arm64" ]; then
