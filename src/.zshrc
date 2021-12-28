@@ -31,7 +31,7 @@ fi
 arch_name="$(uname -m)"
 kernel_name="$(uname -s)"
 if [ "${kernel_name}" = "Linux" ]; then
-    share_path="~"
+    share_path="~/.oh-my-zsh"
 elif [ "${arch_name}" = "x86_64" ]; then
     share_path="/usr/local/share"
 elif [ "${arch_name}" = "arm64" ]; then
