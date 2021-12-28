@@ -289,19 +289,12 @@
         state: present
       tags: chrome
 
-    - name: "chrisvanmeer.chrome : Add specified repository for Google Chrome."
+    - name: "chrisvanmeer.chrome : Ensure Google Chrome repository is present."
       apt_repository:
         repo: "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main"
         state: present
         filename: google-chrome
       tags: chrome
-
-    # - name: "chrisvanmeer.chrome : Esnure only the right architecture in the repo is enabled."
-    #   lineinfile:
-    #     dest: /etc/apt/sources.list.d/google-chrome.list
-    #     line: '#deb http://dl.google.com/linux/chrome/deb/ stable main'
-    #     regexp: '^deb http'
-    #   tags: chrome
 
     - name: "chrisvanmeer.xtra : Update apt cache."
       apt:
