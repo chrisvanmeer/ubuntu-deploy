@@ -12,3 +12,4 @@ roles:
   - name: geerlingguy.security
   - name: oefenweb.ufw
   - name: diodonfrost.vagrant
+  - name: chrisvanmeer.hashicorp
