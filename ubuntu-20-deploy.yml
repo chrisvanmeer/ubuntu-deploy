@@ -52,6 +52,7 @@
     src_files: "src"
     dotfiles_files:
       - .bash_aliases
+      - .gitconfig
       - .gitignore
       - .hushlogin
       - .tmux.conf
