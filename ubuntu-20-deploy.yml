@@ -38,9 +38,13 @@
 
     # HashiCorp product selection
     hashicorp_product_selection:
+      - boundary
       - consul
       - nomad
+      - packer
       - terraform
+      - waypoint
+      - vagrant
       - vault
 
     # Variables for copy jobs
@@ -106,6 +110,7 @@
     xtra_snap_packages:
       - beekeeper-studio
       - bpytop
+      - irccloud
       - mattermost-desktop
       - multipass
       - remmina
