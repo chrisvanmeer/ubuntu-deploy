@@ -150,6 +150,8 @@
       tags: dotfiles, core, roles
     - role: chrisvanmeer.hashicorp
       tags: hashicorp, core, roles
+    - role: chrisvanmeer.vim
+      tags: vim, core, roles
 
   tasks:
     - name: "chrisvanmeer.openssh : Ensure openssh-server is installed."
@@ -199,27 +201,6 @@
         name: "{{ current_user }}"
         shell: "{{ zsh_path.stdout }}"
       tags: zsh, core
-
-    - name: "chrisvanmeer.vim : Check if indentLine plugin is installed."
-      stat:
-        path: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
-      become: false
-      register: identline
-      tags: vim, core
-
-    - name: "chrisvanmeer.vim : Clone indentLine repo if identLine is not installed."
-      git:
-        repo: https://github.com/Yggdroot/indentLine.git
-        dest: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
-      become: false
-      when: not identline.stat.exists
-      tags: vim, core
-
-    - name: "chrisvanmeer.vim : Register identLine plugin if identLine is not installed."
-      command: 'vim -u NONE -c "helptags {{ home_path }}/.vim/pack/vendor/start/indentLine/doc" -c "q"'
-      become: false
-      when: not identline.stat.exists
-      tags: vim, core
 
     - name: "chrisvanmeer.php-post : Remove standard index.html."
       file:
