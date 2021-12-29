@@ -49,16 +49,6 @@
 
     # Variables for copy jobs
     home_path: "~"
-    src_files: "src"
-    dotfiles_files:
-      - .bash_aliases
-      - .gitconfig
-      - .gitignore
-      - .hushlogin
-      - .tmux.conf
-      - .vimrc
-      - .zsh_aliases
-      - .zshrc
 
     # Package variables
     xtra_apt_packages:
@@ -156,11 +146,12 @@
       tags: ufw, core, roles
     - role: diodonfrost.vagrant
       tags: vagrant, core, roles
+    - role: chrisvanmeer.dotfiles
+      tags: dotfiles, core, roles
     - role: chrisvanmeer.hashicorp
       tags: hashicorp, core, roles
 
   tasks:
-
     - name: "chrisvanmeer.openssh : Ensure openssh-server is installed."
       apt:
         name:
@@ -175,14 +166,6 @@
         state: started
         enabled: yes
       tags: openssh, core
-
-    - name: "chrisvanmeer.dotfiles : Copy dotfiles to their location."
-      copy:
-        src: "{{ src_files }}/{{ item }}"
-        dest: "{{ home_path }}/{{ item }}"
-      become: false
-      loop: "{{ dotfiles_files }}"
-      tags: dotfiles, core
 
     - name: "chrisvanmeer.zsh : Ensure zsh is installed."
       apt:
@@ -217,28 +200,6 @@
         shell: "{{ zsh_path.stdout }}"
       tags: zsh, core
 
-    - name: "chrisvanmeer.vim : Check if vim cobalt theme is present."
-      stat:
-        path: "{{ home_path }}/.vim/colors/cobalt.vim"
-      become: false
-      register: vimcolors
-      tags: vim, vimcolors, core
-
-    - name: "chrisvanmeer.vim : Ensure vim colors directory is present."
-      file:
-        path: "{{ home_path }}/.vim/colors"
-        state: directory
-      become: false
-      tags: vim, vimcolors, core
-
-    - name: "chrisvanmeer.vim : Install cobalt theme if not present."
-      copy:
-        src: "{{ src_files }}/.vim/colors/cobalt.vim"
-        dest: "{{ home_path }}/.vim/colors/cobalt.vim"
-      become: false
-      when: not vimcolors.stat.exists
-      tags: vim, vimcolors, core
-
     - name: "chrisvanmeer.vim : Check if indentLine plugin is installed."
       stat:
         path: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
@@ -255,7 +216,7 @@
       tags: vim, core
 
     - name: "chrisvanmeer.vim : Register identLine plugin if identLine is not installed."
-      command: "vim -u NONE -c \"helptags {{ home_path }}/.vim/pack/vendor/start/indentLine/doc\" -c \"q\""
+      command: 'vim -u NONE -c "helptags {{ home_path }}/.vim/pack/vendor/start/indentLine/doc" -c "q"'
       become: false
       when: not identline.stat.exists
       tags: vim, core
