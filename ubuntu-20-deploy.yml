@@ -53,6 +53,11 @@
     # Variables for dotfiles
     dotfiles_repo: "https://github.com/chrisvanmeer/dotfiles.git"
     dotfiles_repo_version: main
+    dotfiles_files:
+      - .zshrc
+      - .zsh_aliases
+      - .gitignore
+      - .vimrc
 
     # Package variables
     xtra_apt_packages:
