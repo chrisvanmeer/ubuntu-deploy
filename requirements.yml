@@ -1,9 +1,11 @@
 ---
 roles:
+  - name: chrisvanmeer.dotfiles
+  - name: chrisvanmeer.hashicorp
+  - name: diodonfrost.vagrant
   - name: geerlingguy.apache
   - name: geerlingguy.certbot
   - name: geerlingguy.docker
-  - name: geerlingguy.dotfiles
   - name: geerlingguy.mysql
   - name: geerlingguy.ntp
   - name: geerlingguy.php
@@ -12,5 +14,3 @@ roles:
   - name: geerlingguy.postfix
   - name: geerlingguy.security
   - name: oefenweb.ufw
-  - name: diodonfrost.vagrant
-  - name: chrisvanmeer.hashicorp
