@@ -68,7 +68,6 @@
       - bsdgames
       - build-essential
       - certbot
-      - consul
       - curl
       - ddgr
       - flameshot
@@ -91,7 +90,6 @@
       - neofetch
       - net-tools
       - nload
-      - nomad
       - screen
       - telnet
       - terraform
