@@ -2,6 +2,7 @@
 roles:
   - name: chrisvanmeer.dotfiles
   - name: chrisvanmeer.hashicorp
+  - name: chrisvanmeer.vim
   - name: diodonfrost.vagrant
   - name: geerlingguy.apache
   - name: geerlingguy.certbot
