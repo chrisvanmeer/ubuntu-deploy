@@ -147,6 +147,7 @@
     - role: geerlingguy.ntp
       tags: ntp, core, roles
     - role: geerlingguy.dotfiles
+      become: false
       tags: dotfiles, core, roles
     - role: oefenweb.ufw
       tags: ufw, core, roles
