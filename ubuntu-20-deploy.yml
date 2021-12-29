@@ -50,6 +50,10 @@
     # Variables for copy jobs
     home_path: "~"
 
+    # Variables for dotfiles
+    dotfiles_repo: "https://github.com/chrisvanmeer/dotfiles.git"
+    dotfiles_repo_version: main
+
     # Package variables
     xtra_apt_packages:
       - alpine
@@ -142,12 +146,12 @@
       tags: security, core, roles
     - role: geerlingguy.ntp
       tags: ntp, core, roles
+    - role: geerlingguy.dotfiles
+      tags: dotfiles, core, roles
     - role: oefenweb.ufw
       tags: ufw, core, roles
     - role: diodonfrost.vagrant
       tags: vagrant, core, roles
-    - role: chrisvanmeer.dotfiles
-      tags: dotfiles, core, roles
     - role: chrisvanmeer.hashicorp
       tags: hashicorp, core, roles
 
