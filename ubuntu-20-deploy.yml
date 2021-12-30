@@ -189,6 +189,20 @@
       become: false
       tags: zsh, core
 
+    - name: "chrisvanmeer.zsh : Ensure zsh-autosuggestions plugin is installed."
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+      become: false
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Ensure zsh-syntax-highlighting plugin is installed."
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+      become: false
+      tags: zsh, core
+
     - name: "chrisvanmeer.zsh : Get zsh path."
       command: which zsh
       register: zsh_path
