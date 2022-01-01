@@ -58,6 +58,28 @@ cd ubuntu-deploy
 ansible-galaxy install -r requirements.yml
 ```
 
+## Create ansible.cfg and inventory as example
+
+`ansible.cfg`
+
+```
+[defaults]
+nocows                = True
+inventory             = inventory
+deprecation_warnings  = False
+host_key_checking     = False
+interpreter_python    = auto_silent
+```
+
+`inventory`
+
+```
+localhost ansible_connection=local
+server1
+server2
+server3
+```
+
 ## Run the playbook
 
 Using a playbook for Ubuntu 20.04 LTS for this example
