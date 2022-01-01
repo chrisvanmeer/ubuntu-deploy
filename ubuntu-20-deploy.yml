@@ -1,7 +1,6 @@
 ---
 - name: "Ubuntu 20.04 LTS Deployment"
-  hosts: localhost
-  connection: local
+  hosts: all
   become: true
 
   vars:
