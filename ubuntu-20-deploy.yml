@@ -122,6 +122,21 @@
         current_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
       tags: fact, zsh, docker, core
 
+    - name: "chrisvanmeer.openssh : Ensure openssh-server is installed."
+      apt:
+        name:
+          - openssh-server
+          - openssh-client
+        state: present
+      tags: openssh, core
+
+    - name: "chrisvanmeer.openssh : Ensure openssh-server is started and enabled."
+      service:
+        name: ssh
+        state: started
+        enabled: yes
+      tags: openssh, core
+
   roles:
     - role: geerlingguy.certbot
       tags: certbot, core, roles
@@ -241,12 +256,10 @@
       tags: php-post, core
 
     - name: "chrisvanmeer.php-post : Create Hello World PHP page."
-      copy:
+      file:
         dest: /var/www/html/index.php
-        content: |
-          <?php
-            echo 'Hello World!';
-          ?>
+        state: touch
+        mode: "0644"
       tags: php-post, core
 
     - name: "chrisvanmeer.apt-pre : Add needed PPA's."
@@ -310,6 +323,60 @@
       apt:
         autoclean: yes
       tags: apt-post
+
+    - name: "chrisvanmeer.vim : Check if indentLine plugin is installed."
+      stat:
+        path: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
+      become: false
+      register: identline
+      tags: vim
+
+    - name: "chrisvanmeer.vim : Clone indentLine repo if identLine is not installed."
+      git:
+        repo: https://github.com/Yggdroot/indentLine.git
+        dest: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
+      become: false
+      when: not identline.stat.exists
+      tags: vim
+
+    - name: "chrisvanmeer.vim : Register identLine plugin if identLine is not installed."
+      command: 'vim -u NONE -c "helptags {{ home_path }}/.vim/pack/vendor/start/indentLine/doc" -c "q"'
+      become: false
+      when: not identline.stat.exists
+      tags: vim
+
+    - name: "chrisvanmeer.zsh : Ensure zsh is installed."
+      apt:
+        name: zsh
+        state: present
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Ensure oh-my-zsh is installed."
+      git:
+        repo: https://github.com/robbyrussell/oh-my-zsh
+        dest: ~/.oh-my-zsh
+      become: false
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Ensure zsh-history-substring-search plugin is installed."
+      git:
+        repo: https://github.com/zsh-users/zsh-history-substring-search
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search
+      become: false
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Get zsh path."
+      command: which zsh
+      register: zsh_path
+      become: false
+      changed_when: false
+      tags: zsh, core
+
+    - name: "chrisvanmeer.zsh : Switch shell of current user to zsh."
+      user:
+        name: "{{ current_user }}"
+        shell: "{{ zsh_path.stdout }}"
+      tags: zsh, core
 
     - name: "chrisvanmeer.post : Check if a reboot is needed."
       register: reboot_required_file
