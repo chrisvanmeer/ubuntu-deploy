@@ -295,6 +295,14 @@
         shell: "{{ zsh_path.stdout }}"
       tags: zsh, core
 
+    - name: "chrisvanmeer.wifi : Ensure that no Wi-Fi powersave options are disabled."
+      lineinfile:
+        path: "/etc/NetworkManager/conf.d/default-wifi-powersave-on.conf"
+        regexp: 'wifi\.powersave = 3'
+        line: "wifi.powersave = 2"
+        backup: true
+      tags: wifi, core
+
     - name: "chrisvanmeer.post : Check if a reboot is needed."
       register: reboot_required_file
       stat:
