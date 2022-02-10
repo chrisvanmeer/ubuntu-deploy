@@ -70,6 +70,8 @@
       - googler
       - htop
       - iperf3
+      - iotop
+      - jq
       - less
       - lynx
       - mailutils
@@ -81,12 +83,14 @@
       - net-tools
       - nload
       - screen
+      - sysstat
       - telnet
       - terraform
       - tilix
       - tmux
       - tree
       - ulauncher
+      - unattended-upgrades
       - vault
       - vim
       - virtualbox
