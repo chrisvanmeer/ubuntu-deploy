@@ -78,6 +78,7 @@
       - mc
       - mlocate
       - multitail
+      - mutt
       - nano
       - neofetch
       - net-tools
@@ -85,13 +86,11 @@
       - screen
       - sysstat
       - telnet
-      - terraform
       - tilix
       - tmux
       - tree
       - ulauncher
       - unattended-upgrades
-      - vault
       - vim
       - virtualbox
       - virtualbox-ext-pack
@@ -162,8 +161,6 @@
       tags: ntp, core, roles
     - role: oefenweb.ufw
       tags: ufw, core, roles
-    - role: diodonfrost.vagrant
-      tags: vagrant, core, roles
     - role: chrisvanmeer.dotfiles
       tags: dotfiles, core, roles
     - role: chrisvanmeer.hashicorp
